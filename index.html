@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Useful GUIs for a PhD thesis on reduced web section connections for seismic retrofitting.">
+  <meta name="theme-color" content="#f6f7fb">
+  <title>RWS PhD Thesis GUIs</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #5b6472;
+      --line: #d8dee8;
+      --paper: #ffffff;
+      --soft: #f6f7fb;
+      --accent: #0b5cad;
+      --accent-dark: #083d73;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--soft);
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 32px;
+      align-items: center;
+      padding: 34px 0 28px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: 0;
+      line-height: 1.05;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--accent-dark);
+      font-weight: 650;
+      font-size: 0.88rem;
+      margin-bottom: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    .brand img {
+      display: block;
+      max-height: 54px;
+      max-width: 190px;
+      object-fit: contain;
+    }
+
+    main {
+      padding: 28px 0 44px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 42% 1fr;
+      min-height: 250px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      object-fit: cover;
+      border-right: 1px solid var(--line);
+      background: #e9edf3;
+    }
+
+    .content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chapter {
+      color: var(--accent-dark);
+      font-size: 0.86rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.28rem;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 38px;
+      padding: 8px 13px;
+      margin-top: auto;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .button:focus,
+    .button:hover {
+      background: var(--accent-dark);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      padding: 20px 0;
+      background: var(--paper);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .brand {
+        justify-content: flex-start;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .card {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        min-height: 190px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div>
+        <div class="tag">PhD thesis companion tools</div>
+        <h1>RWS PhD Thesis GUIs</h1>
+        <p class="lead">Useful browser-based GUIs for my PhD thesis on reduced web section connections for seismic retrofitting, including FE-derived response exploration, dynamic radar comparison, cumulative energy dissipation, and machine learning-based backbone prediction.</p>
+      </div>
+      <div class="brand" aria-label="Institutional and research group logos">
+        <img src="chapter-4/rws-explorer/3DMBC_logo.png" alt="3DMBC logo">
+        <img src="chapter-4/rws-explorer/city-st-georges-responsive-logo.svg" alt="City St George's, University of London logo">
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid" aria-label="Thesis GUI links">
+      <article class="card">
+        <img src="screenshots/20260605_v1_RWSExplorer.png" alt="Reduced Web Section Explorer screenshot">
+        <div class="content">
+          <div class="chapter">Chapter 4</div>
+          <h2>Reduced Web Section Explorer</h2>
+          <p>FE-derived RWS geometry screening, backbone response, and column-face demand.</p>
+          <a class="button" href="chapter-4/rws-explorer/">Open GUI</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="screenshots/20260605_v1_RadarPlot.png" alt="RWS connection dynamic radar plot screenshot">
+        <div class="content">
+          <div class="chapter">Chapter 4</div>
+          <h2>RWS Connection Dynamic Radar Plot</h2>
+          <p>Normalised comparison of column-face demand, energy dissipation, degradation, theta(0.6), and column-face moment demand.</p>
+          <a class="button" href="chapter-4/dynamic-radar-plot/">Open GUI</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="screenshots/20260605_v1_EnergyDissipation.png" alt="Cumulative energy dissipation GUI screenshot">
+        <div class="content">
+          <div class="chapter">Chapter 4</div>
+          <h2>Cumulative Energy Dissipation</h2>
+          <p>Batch-wise comparison of cumulative energy dissipation trends across RWS connection models.</p>
+          <a class="button" href="chapter-4/energy-dissipation/">Open GUI</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="screenshots/20260605_v1_FEMLBackbone.png" alt="FE and ML backbone curve prediction GUI screenshot">
+        <div class="content">
+          <div class="chapter">Chapter 7</div>
+          <h2>FE and ML Backbone Prediction</h2>
+          <p>Interactive FE and machine learning comparison for predicting backbone curves of RWS connections.</p>
+          <a class="button" href="chapter-7/fe-ml-backbone/">Open GUI</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Meysam Bayat, City St George's, University of London.</div>
+  </footer>
+</body>
+</html>

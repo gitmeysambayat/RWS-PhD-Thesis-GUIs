@@ -1,19 +1,21 @@
 # RWS PhD Thesis GUIs
 
-Companion graphical user interfaces for my PhD thesis on reduced web section (RWS) connections for seismic retrofitting.
+Useful GUIs for my PhD thesis on reduced web section (RWS) connections for seismic retrofitting.
 
-Suggested GitHub repository description:
+This repository is the single consolidated home for the browser-based GUI tools associated with the thesis. The GUIs are grouped by thesis chapter and can be opened directly through GitHub Pages.
 
-> Useful GUIs for my PhD thesis on RWS connections for seismic retrofitting.
+## Live Site
 
-## Live GUIs
+[Open the consolidated GUI site](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/)
 
-| Thesis chapter | GUI | Purpose | Live link |
+## GUIs Included
+
+| Thesis chapter | GUI | Local path | Live link |
 |---|---|---|---|
-| Chapter 4 | Reduced Web Section Explorer | FE-derived RWS geometry screening, backbone response, and column-face demand. | [Open GUI](https://gitmeysambayat.github.io/rws-gui/) |
-| Chapter 4 | RWS Connection Dynamic Radar Plot | Normalised comparison of column-face demand, energy dissipation, degradation, theta(0.6), and column-face moment demand. | [Open GUI](https://gitmeysambayat.github.io/RWS-connection-Dynamic-Radar-plot/) |
-| Chapter 4 | Cumulative Energy Dissipation for RWS Connections | Batch-wise comparison of cumulative energy dissipation trends across RWS connection models. | [Open GUI](https://gitmeysambayat.github.io/EnergyDissipation-RWS_Connections/) |
-| Chapter 7 | Machine-Learning-Based Prediction of Backbone Curves for RWS Connections | Interactive FE and ML comparison for predicting backbone curves of RWS connections. | [Open GUI](https://gitmeysambayat.github.io/rws_gui_merged_FE_ML/) |
+| Chapter 4 | Reduced Web Section Explorer | `chapter-4/rws-explorer/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/rws-explorer/) |
+| Chapter 4 | RWS Connection Dynamic Radar Plot | `chapter-4/dynamic-radar-plot/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/dynamic-radar-plot/) |
+| Chapter 4 | Cumulative Energy Dissipation for RWS Connections | `chapter-4/energy-dissipation/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/energy-dissipation/) |
+| Chapter 7 | FE and ML Backbone Prediction for RWS Connections | `chapter-7/fe-ml-backbone/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-7/fe-ml-backbone/) |
 
 ## Screenshots
 
@@ -33,16 +35,9 @@ Suggested GitHub repository description:
 
 <img src="screenshots/20260605_v1_FEMLBackbone.png" alt="FE and ML backbone curve prediction GUI screenshot" width="720">
 
-## Repository Links
-
-- [Reduced-Web-Section-Explorer](https://github.com/gitmeysambayat/rws-gui)
-- [RWS-Connections-Dynamic-Radar-Plot](https://github.com/gitmeysambayat/RWS-connection-Dynamic-Radar-plot)
-- [Cumulative-Energy-Dissipation-RWS-Connections](https://github.com/gitmeysambayat/EnergyDissipation-RWS_Connections)
-- [Machine-Learning-Based Prediction of Backbone Curves for RWS Connections](https://github.com/gitmeysambayat/rws_gui_merged_FE_ML)
-
 ## Research Context
 
-The tools support visual interrogation of finite element and machine learning outputs for RWS connection behaviour, including cyclic response, moment-rotation backbone response, cumulative energy dissipation, and column-face demand.
+The GUIs support visual interrogation of finite element and machine learning outputs for RWS connection behaviour, including cyclic response, moment-rotation backbone response, cumulative energy dissipation, and column-face demand.
 
 Relevant linked outputs:
 
@@ -50,6 +45,6 @@ Relevant linked outputs:
 - [ce/papers conference paper](https://doi.org/10.1002/cepa.70170)
 - [Research Square preprint](https://doi.org/10.21203/rs.3.rs-8506924/v1)
 
-## Local Use
+## Repository Organisation
 
-Clone the individual GUI repositories or open the live links above. The GUIs are static browser-based tools and do not require a local server for normal viewing.
+This repository is intended to replace the scattered thesis GUI repositories on my GitHub profile. After confirming that the consolidated GitHub Pages links work, the older standalone thesis GUI repositories can be deleted or archived.
