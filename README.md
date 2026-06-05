@@ -1,45 +1,45 @@
-# RWS PhD Thesis GUIs
+# Complementary GUIs for RWS PhD Thesis
 
-Useful GUIs for my PhD thesis on reduced web section (RWS) connections for seismic retrofitting.
+Complementary GUIs for my PhD thesis "Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames".
 
-This repository is the single consolidated home for the browser-based GUI tools associated with the thesis. The GUIs are grouped by thesis chapter and can be opened directly through GitHub Pages.
+This repository is the single consolidated home for the browser-based GUI tools associated with the thesis. The GUIs are organised by their role in the thesis evidence base, rather than by a single chapter label, because the database interrogation tools support the finite element database generation, database-driven synthesis, and supplementary screening workflow.
 
 ## Live Site
 
 [Open the consolidated GUI site](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/)
 
-<img src="screenshots/20260605_v2_ConsolidatedHub.png" alt="Consolidated RWS PhD Thesis GUIs homepage screenshot" width="720">
+<img src="screenshots/20260605_v3_ConsolidatedHub.png" alt="Consolidated RWS PhD Thesis GUIs homepage screenshot" width="720">
 
 ## GUIs Included
 
-| Thesis chapter | GUI | Local path | Live link |
+| Thesis placement | GUI | Local path | Live link |
 |---|---|---|---|
-| Chapter 4 | Reduced Web Section Explorer | `chapter-4/rws-explorer/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/rws-explorer/) |
-| Chapter 4 | RWS Connection Dynamic Radar Plot | `chapter-4/dynamic-radar-plot/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/dynamic-radar-plot/) |
-| Chapter 4 | Cumulative Energy Dissipation for RWS Connections | `chapter-4/energy-dissipation/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-4/energy-dissipation/) |
-| Chapter 7 | FE and ML Backbone Prediction for RWS Connections | `chapter-7/fe-ml-backbone/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-7/fe-ml-backbone/) |
+| FE database and database-driven synthesis | Reduced Web Section Explorer | `database-guis/rws-explorer/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/) |
+| Design-oriented database screening | RWS Connection Dynamic Radar Plot | `database-guis/dynamic-radar-plot/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/) |
+| Post-peak response and cumulative energy dissipation | Cumulative Energy Dissipation for RWS Connections | `database-guis/energy-dissipation/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/) |
+| Chapter 6, explainable machine-learning surrogate and GUI | FE and ML Backbone Prediction for RWS Connections | `chapter-6-ml-backbone-gui/` | [Open GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-6-ml-backbone-gui/) |
 
 ## Screenshots
 
-### Chapter 4, Reduced Web Section Explorer
+### FE Database, Reduced Web Section Explorer
 
 <img src="screenshots/20260605_v1_RWSExplorer.png" alt="Reduced Web Section Explorer screenshot" width="720">
 
-### Chapter 4, Dynamic Radar Plot
+### Database Screening, Dynamic Radar Plot
 
 <img src="screenshots/20260605_v1_RadarPlot.png" alt="RWS connection dynamic radar plot screenshot" width="720">
 
-### Chapter 4, Cumulative Energy Dissipation
+### Post-Peak Response, Cumulative Energy Dissipation
 
 <img src="screenshots/20260605_v1_EnergyDissipation.png" alt="Cumulative energy dissipation GUI screenshot" width="720">
 
-### Chapter 7, FE and ML Backbone Prediction
+### Chapter 6, FE and ML Backbone Prediction
 
 <img src="screenshots/20260605_v1_FEMLBackbone.png" alt="FE and ML backbone curve prediction GUI screenshot" width="720">
 
 ## Research Context
 
-The GUIs support visual interrogation of finite element and machine learning outputs for RWS connection behaviour, including cyclic response, moment-rotation backbone response, cumulative energy dissipation, and column-face demand.
+The GUIs support visual interrogation of finite element and machine learning outputs for circular RWS connection behaviour, including cyclic response, moment-rotation backbone response, cumulative energy dissipation, and column-face demand. In the submitted thesis, the three database GUIs are associated with the finite element database and database-driven synthesis workflow, while the ML backbone prediction GUI belongs to Chapter 6, "Explainable Machine-Learning-Based Prediction of Backbone Curves and GUI".
 
 Relevant linked outputs:
 
