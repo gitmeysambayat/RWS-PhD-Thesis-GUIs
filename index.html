@@ -40,7 +40,6 @@
     }
 
     .hero {
-      position: relative;
       padding: 20px 0 18px;
     }
 
@@ -120,12 +119,13 @@
     .brand {
       position: absolute;
       top: 18px;
-      right: 0;
+      right: clamp(8px, 0.8vw, 16px);
       display: flex;
       align-items: center;
       gap: 14px;
       justify-content: flex-end;
       min-width: 300px;
+      z-index: 2;
     }
 
     .brand img {

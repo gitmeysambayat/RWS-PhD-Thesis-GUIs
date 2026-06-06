@@ -194,6 +194,10 @@
   }
   .contourItem{ }
   .contourHead{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:6px; }
+  .contourHead .proxyStatus{
+    color:#92400e;
+    font-weight:700;
+  }
   .imgWrap{
     border:1px solid var(--line2);
     border-radius:12px;
@@ -213,6 +217,7 @@
     object-fit:contain;
   }
   .imgWrap img.missing{ display:none; }
+  .contourNote{ margin-top:8px; }
 
   /* Image modal */
   .modal{
@@ -781,6 +786,7 @@
           </div>
         </div>
       </div>
+      <div class="small muted contourNote" id="contourHint"></div>
 </div>
 
     <div class="card" id="feOutputCard">
@@ -1319,19 +1325,36 @@
   function setImgWithFallback(imgEl, statusEl, paths) {
     if (!imgEl || !statusEl) return;
     let i = 0;
+    let active = null;
     const tryLoad = () => {
       if (i >= paths.length) {
         imgEl.classList.add('missing');
         imgEl.removeAttribute('src');
+        imgEl.removeAttribute('data-contour-note');
+        imgEl.removeAttribute('data-contour-source');
+        statusEl.classList.remove('proxyStatus');
         statusEl.textContent = 'Not available';
         return;
       }
       const p = paths[i++];
+      active = (typeof p === 'string') ? { url: p, note: '', source: '' } : p;
       imgEl.classList.remove('missing');
-      statusEl.textContent = 'Loading...';
-      imgEl.src = p;
+      imgEl.dataset.contourNote = active.note || '';
+      imgEl.dataset.contourSource = active.source || '';
+      statusEl.classList.remove('proxyStatus');
+      statusEl.textContent = active.note ? 'Loading proxy...' : 'Loading...';
+      imgEl.src = active.url;
+      imgEl.alt = active.alt || imgEl.alt;
     };
-    imgEl.onload = () => { statusEl.textContent = ''; };
+    imgEl.onload = () => {
+      if (active && active.note) {
+        statusEl.classList.add('proxyStatus');
+        statusEl.textContent = active.note;
+      } else {
+        statusEl.classList.remove('proxyStatus');
+        statusEl.textContent = '';
+      }
+    };
     imgEl.onerror = () => { tryLoad(); };
     tryLoad();
   }
@@ -1340,6 +1363,37 @@
     const parts = String(code || '').split('.');
     if (parts.length < 4) return null;
     return { L: parts[0], profile: parts[1], grade: parts[2], caseId: parts[3] };
+  }
+
+  function contourCandidate(url, note = '', source = '', alt = '') {
+    return { url, note, source, alt };
+  }
+
+  function appendContourCandidates(candidates, base, folder, modelCode, suffix, note = '', source = '') {
+    const parts = parseModelCodeParts(modelCode);
+    if (parts) {
+      candidates.push(contourCandidate(
+        `${base}/${folder}/${parts.grade}/${parts.profile}/${modelCode}${suffix}.png`,
+        note,
+        source
+      ));
+      candidates.push(contourCandidate(
+        `${base}/${folder}/${parts.grade}/${parts.profile}/${modelCode}${suffix}.webp`,
+        note,
+        source
+      ));
+    }
+    candidates.push(contourCandidate(`${base}/${folder}/${modelCode}${suffix}.png`, note, source));
+    candidates.push(contourCandidate(`${base}/${folder}/${modelCode}${suffix}.webp`, note, source));
+  }
+
+  function nearestAvailableContourProxy(modelCode) {
+    const parts = parseModelCodeParts(modelCode);
+    if (!parts) return null;
+    if (parts.L === '6' && parts.profile === '270' && parts.grade === 'S355') {
+      return `7.${parts.profile}.${parts.grade}.${parts.caseId}`;
+    }
+    return null;
   }
 
   function updateContours(modelCode) {
@@ -1353,23 +1407,24 @@
 
     const vmCandidates = [];
     const peeqCandidates = [];
+    const proxyCode = nearestAvailableContourProxy(modelCode);
+    const proxyNote = proxyCode ? `Proxy shown: ${proxyCode}` : '';
 
     // Preferred folder layout (recommended for GitHub): contours/VonMises/<Grade>/<Profile>/<file>
     // Fallback layout: contours/VonMises/<file>
-    if (parts) {
-      vmCandidates.push(`${base}/VonMises/${parts.grade}/${parts.profile}/${modelCode}_VonMises.png`);
-      vmCandidates.push(`${base}/VonMises/${parts.grade}/${parts.profile}/${modelCode}_VonMises.webp`);
-      peeqCandidates.push(`${base}/PEEQ/${parts.grade}/${parts.profile}/${modelCode}_PEEQ.png`);
-      peeqCandidates.push(`${base}/PEEQ/${parts.grade}/${parts.profile}/${modelCode}_PEEQ.webp`);
+    appendContourCandidates(vmCandidates, base, 'VonMises', modelCode, '_VonMises');
+    appendContourCandidates(peeqCandidates, base, 'PEEQ', modelCode, '_PEEQ');
+    if (proxyCode) {
+      appendContourCandidates(vmCandidates, base, 'VonMises', proxyCode, '_VonMises', proxyNote, proxyCode);
+      appendContourCandidates(peeqCandidates, base, 'PEEQ', proxyCode, '_PEEQ', proxyNote, proxyCode);
     }
 
-    vmCandidates.push(`${base}/VonMises/${modelCode}_VonMises.png`);
-    vmCandidates.push(`${base}/VonMises/${modelCode}_VonMises.webp`);
-    peeqCandidates.push(`${base}/PEEQ/${modelCode}_PEEQ.png`);
-    peeqCandidates.push(`${base}/PEEQ/${modelCode}_PEEQ.webp`);
-
     if (el.contourHint) {
-      if (parts) {
+      if (proxyCode) {
+        el.contourHint.textContent =
+          `Exact contour image files for ${modelCode} are not present in this repository. ` +
+          `The GUI falls back to the nearest available same-profile, same-grade case, ${proxyCode}.`;
+      } else if (parts) {
         el.contourHint.textContent =
           `Files: ${base}/VonMises/${parts.grade}/${parts.profile}/${modelCode}_VonMises.png (fallback: ${base}/VonMises/${modelCode}_VonMises.png) and ` +
           `${base}/PEEQ/${parts.grade}/${parts.profile}/${modelCode}_PEEQ.png (fallback: ${base}/PEEQ/${modelCode}_PEEQ.png)`;
@@ -1385,8 +1440,20 @@
   function clearContours(reason = 'Not available') {
     if (el.vmStatus) el.vmStatus.textContent = reason;
     if (el.peeqStatus) el.peeqStatus.textContent = reason;
-    if (el.imgVonMises) { el.imgVonMises.classList.add('missing'); el.imgVonMises.removeAttribute('src'); }
-    if (el.imgPEEQ) { el.imgPEEQ.classList.add('missing'); el.imgPEEQ.removeAttribute('src'); }
+    if (el.vmStatus) el.vmStatus.classList.remove('proxyStatus');
+    if (el.peeqStatus) el.peeqStatus.classList.remove('proxyStatus');
+    if (el.imgVonMises) {
+      el.imgVonMises.classList.add('missing');
+      el.imgVonMises.removeAttribute('src');
+      el.imgVonMises.removeAttribute('data-contour-note');
+      el.imgVonMises.removeAttribute('data-contour-source');
+    }
+    if (el.imgPEEQ) {
+      el.imgPEEQ.classList.add('missing');
+      el.imgPEEQ.removeAttribute('src');
+      el.imgPEEQ.removeAttribute('data-contour-note');
+      el.imgPEEQ.removeAttribute('data-contour-source');
+    }
     if (el.contourHint) el.contourHint.textContent = '';
   }
 
@@ -1395,14 +1462,16 @@
       el.imgVonMises.addEventListener('click', () => {
         const src = el.imgVonMises.getAttribute('src');
         if (!src) return;
-        openModal(`${el.modelName.textContent} | von Mises`, src);
+        const note = el.imgVonMises.dataset.contourNote ? ` | ${el.imgVonMises.dataset.contourNote}` : '';
+        openModal(`${el.modelName.textContent} | von Mises${note}`, src);
       });
     }
     if (el.imgPEEQ) {
       el.imgPEEQ.addEventListener('click', () => {
         const src = el.imgPEEQ.getAttribute('src');
         if (!src) return;
-        openModal(`${el.modelName.textContent} | PEEQ`, src);
+        const note = el.imgPEEQ.dataset.contourNote ? ` | ${el.imgPEEQ.dataset.contourNote}` : '';
+        openModal(`${el.modelName.textContent} | PEEQ${note}`, src);
       });
     }
   }
