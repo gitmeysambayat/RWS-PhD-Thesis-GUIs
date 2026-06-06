@@ -1387,15 +1387,6 @@
     candidates.push(contourCandidate(`${base}/${folder}/${modelCode}${suffix}.webp`, note, source));
   }
 
-  function nearestAvailableContourProxy(modelCode) {
-    const parts = parseModelCodeParts(modelCode);
-    if (!parts) return null;
-    if (parts.L === '6' && parts.profile === '270' && parts.grade === 'S355') {
-      return `7.${parts.profile}.${parts.grade}.${parts.caseId}`;
-    }
-    return null;
-  }
-
   function updateContours(modelCode) {
     if (!modelCode) {
       clearContours('Not available');
@@ -1407,24 +1398,14 @@
 
     const vmCandidates = [];
     const peeqCandidates = [];
-    const proxyCode = nearestAvailableContourProxy(modelCode);
-    const proxyNote = proxyCode ? `Proxy shown: ${proxyCode}` : '';
 
     // Preferred folder layout (recommended for GitHub): contours/VonMises/<Grade>/<Profile>/<file>
     // Fallback layout: contours/VonMises/<file>
     appendContourCandidates(vmCandidates, base, 'VonMises', modelCode, '_VonMises');
     appendContourCandidates(peeqCandidates, base, 'PEEQ', modelCode, '_PEEQ');
-    if (proxyCode) {
-      appendContourCandidates(vmCandidates, base, 'VonMises', proxyCode, '_VonMises', proxyNote, proxyCode);
-      appendContourCandidates(peeqCandidates, base, 'PEEQ', proxyCode, '_PEEQ', proxyNote, proxyCode);
-    }
 
     if (el.contourHint) {
-      if (proxyCode) {
-        el.contourHint.textContent =
-          `Exact contour image files for ${modelCode} are not present in this repository. ` +
-          `The GUI falls back to the nearest available same-profile, same-grade case, ${proxyCode}.`;
-      } else if (parts) {
+      if (parts) {
         el.contourHint.textContent =
           `Files: ${base}/VonMises/${parts.grade}/${parts.profile}/${modelCode}_VonMises.png (fallback: ${base}/VonMises/${modelCode}_VonMises.png) and ` +
           `${base}/PEEQ/${parts.grade}/${parts.profile}/${modelCode}_PEEQ.png (fallback: ${base}/PEEQ/${modelCode}_PEEQ.png)`;
