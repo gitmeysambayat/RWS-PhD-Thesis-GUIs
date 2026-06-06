@@ -1,4 +1,4 @@
-# Complementary GUIs for RWS PhD Thesis
+# Complementary GUIs for the PhD thesis
 
 Complementary GUIs for my PhD thesis "Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames".
 
@@ -8,7 +8,7 @@ This repository is the single consolidated home for the browser-based GUI tools 
 
 [Open the consolidated GUI site](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/)
 
-<img src="screenshots/20260605_v3_ConsolidatedHub.png" alt="Consolidated RWS PhD Thesis GUIs homepage screenshot" width="720">
+<img src="screenshots/20260606_v3_RefinedHub16x9.png" alt="Refined complementary RWS PhD thesis GUIs homepage screenshot" width="720">
 
 ## GUIs Included
 
