@@ -895,6 +895,9 @@
     const vm = r[schema.VonMises_CF_norm];
     const pq = r[schema.PEEQ_CF_norm];
     const st = r[schema.Stress_CF_over_Fy_norm];
+    const mc = r[schema.Mc_kNm];
+    const mpRws = r[schema.Mp_RWS_kNm];
+    const mcOverMpRws = (Number.isFinite(mc) && Number.isFinite(mpRws) && mpRws !== 0) ? mc / mpRws : NaN;
 
     const out = [
       {lab:'<span class="sym"><i>M</i><sub>y</sub></span> (kN·m)', val: fmt1(r[schema.My_kNm])},
@@ -908,6 +911,7 @@
       {lab:'von Mises at column face (normalised)', val: fmt2(vm), warn: (Number.isFinite(vm) && vm > 1)},
       {lab:'PEEQ at column face (normalised)', val: fmt2(pq), warn: (Number.isFinite(pq) && pq > 1)},
       {lab:'Stress@CF/<span class="sym"><i>F</i><sub>y</sub></span> (normalised)', val: fmt2(st), warn: (Number.isFinite(st) && st > 1)},
+      {lab:'<span class="sym"><i>M</i><sub>c</sub></span>/<span class="sym"><i>M</i><sub>p,RWS</sub></span>', val: Number.isFinite(mcOverMpRws) ? mcOverMpRws.toFixed(3) : 'N/A'},
     ];
 
     let html = '';
@@ -921,7 +925,6 @@
     el.qualMp.innerHTML = '';
     el.qualMp.appendChild(badge(r[schema.Qual_vs_Mp]));
     el.qualMpRws.innerHTML = '';
-    el.qualMpRws.appendChild(badge(r[schema.Qual_vs_Mp_RWS]));
 
     const m1 = r[schema.Margin_vs_0_8Mp];
     const m2 = r[schema.Margin_vs_0_8Mp_RWS];
