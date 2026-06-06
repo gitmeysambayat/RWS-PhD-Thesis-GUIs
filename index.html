@@ -31,6 +31,7 @@
     header {
       background: var(--paper);
       border-bottom: 1px solid var(--line);
+      position: relative;
     }
 
     .wrap {
@@ -39,15 +40,13 @@
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 28px;
-      align-items: start;
-      padding: 18px 0 18px;
+      position: relative;
+      padding: 20px 0 18px;
     }
 
     .hero-copy {
-      max-width: 1000px;
+      width: min(1280px, 100%);
+      margin: 0 auto;
       text-align: center;
     }
 
@@ -62,9 +61,10 @@
     .thesis-title {
       margin: 0 0 10px;
       color: var(--ink);
-      font-size: clamp(1.08rem, 1.18vw, 1.32rem);
+      font-size: clamp(1.02rem, 0.9vw, 1.14rem);
       font-weight: 760;
       line-height: 1.35;
+      white-space: nowrap;
     }
 
     .byline {
@@ -118,11 +118,13 @@
     }
 
     .brand {
+      position: absolute;
+      top: 18px;
+      right: 0;
       display: flex;
       align-items: center;
       gap: 14px;
       justify-content: flex-end;
-      padding-top: 8px;
       min-width: 300px;
     }
 
@@ -228,20 +230,27 @@
       font-size: 1rem;
     }
 
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        gap: 16px;
+    @media (max-width: 1500px) {
+      .thesis-title {
+        white-space: normal;
       }
 
+      .brand {
+        position: static;
+        margin: 10px auto 0;
+      }
+    }
+
+    @media (max-width: 900px) {
       .hero-copy {
         text-align: left;
       }
 
       .brand {
         justify-content: flex-start;
-        padding-top: 0;
         min-width: 0;
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .grid {

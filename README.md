@@ -8,7 +8,7 @@ This repository is the single consolidated home for the browser-based GUI tools 
 
 [Open the consolidated GUI site](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/)
 
-<img src="screenshots/20260606_v5_RefinedHubWide.png" alt="Refined complementary RWS PhD thesis GUIs homepage screenshot" width="720">
+<img src="screenshots/20260606_v6_HeaderCentredHub.png" alt="Refined complementary RWS PhD thesis GUIs homepage screenshot" width="720">
 
 ## GUIs Included
 
