@@ -34,7 +34,7 @@
     }
 
     .wrap {
-      width: min(1160px, calc(100% - 32px));
+      width: min(1840px, calc(100% - 72px));
       margin: 0 auto;
     }
 
@@ -47,13 +47,13 @@
     }
 
     .hero-copy {
-      max-width: 820px;
+      max-width: 1000px;
       text-align: center;
     }
 
     h1 {
       margin: 0 0 10px;
-      font-size: clamp(1.08rem, 1.6vw, 1.35rem);
+      font-size: clamp(1.3rem, 1.55vw, 1.75rem);
       font-weight: 780;
       letter-spacing: 0;
       line-height: 1.25;
@@ -62,7 +62,7 @@
     .thesis-title {
       margin: 0 0 10px;
       color: var(--ink);
-      font-size: clamp(1rem, 1.45vw, 1.12rem);
+      font-size: clamp(1.08rem, 1.18vw, 1.32rem);
       font-weight: 760;
       line-height: 1.35;
     }
@@ -71,6 +71,7 @@
       margin: 0 0 8px;
       color: var(--muted);
       font-weight: 650;
+      font-size: 1.04rem;
     }
 
     .byline strong {
@@ -82,11 +83,11 @@
       grid-template-columns: repeat(2, minmax(250px, 1fr));
       column-gap: 26px;
       row-gap: 2px;
-      max-width: 760px;
+      max-width: 880px;
       margin: 0 auto 8px;
       padding: 0 0 0 20px;
       color: var(--muted);
-      font-size: 0.95rem;
+      font-size: 1.03rem;
       text-align: left;
     }
 
@@ -97,7 +98,7 @@
     .supplementary {
       margin: 0;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 1.03rem;
     }
 
     .supplementary a {
@@ -131,23 +132,23 @@
     }
 
     .brand .logo-3dmbc {
-      width: 172px;
-      max-height: 84px;
+      width: clamp(180px, 10.5vw, 230px);
+      max-height: 104px;
     }
 
     .brand .logo-city {
-      width: 116px;
-      max-height: 84px;
+      width: clamp(122px, 7.2vw, 162px);
+      max-height: 104px;
     }
 
     main {
-      padding: 18px 0 28px;
+      padding: 20px 0 30px;
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 20px;
     }
 
     .card {
@@ -156,14 +157,14 @@
       border-radius: 8px;
       overflow: hidden;
       display: grid;
-      grid-template-columns: 38% 1fr;
-      min-height: 198px;
+      grid-template-columns: minmax(280px, 42%) 1fr;
+      min-height: clamp(250px, 28vh, 330px);
     }
 
     .card img {
       width: 100%;
       height: 100%;
-      min-height: 198px;
+      min-height: clamp(250px, 28vh, 330px);
       object-fit: cover;
       object-position: top left;
       border-right: 1px solid var(--line);
@@ -171,15 +172,15 @@
     }
 
     .content {
-      padding: 14px 16px;
+      padding: clamp(18px, 1.35vw, 26px);
       display: flex;
       flex-direction: column;
-      gap: 9px;
+      gap: 12px;
     }
 
     .chapter {
       color: var(--accent-dark);
-      font-size: 0.86rem;
+      font-size: clamp(0.9rem, 0.9vw, 1rem);
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.04em;
@@ -187,7 +188,7 @@
 
     h2 {
       margin: 0;
-      font-size: 1.16rem;
+      font-size: clamp(1.28rem, 1.2vw, 1.55rem);
       line-height: 1.25;
       letter-spacing: 0;
     }
@@ -195,6 +196,7 @@
     p {
       margin: 0;
       color: var(--muted);
+      font-size: clamp(1.02rem, 0.95vw, 1.16rem);
     }
 
     .button {
@@ -202,14 +204,15 @@
       align-items: center;
       justify-content: center;
       width: fit-content;
-      min-height: 34px;
-      padding: 7px 12px;
+      min-height: 42px;
+      padding: 9px 15px;
       margin-top: auto;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
       border-radius: 6px;
       font-weight: 700;
+      font-size: 1.02rem;
     }
 
     .button:focus,
@@ -220,9 +223,9 @@
     footer {
       border-top: 1px solid var(--line);
       color: var(--muted);
-      padding: 14px 0;
+      padding: 16px 0;
       background: var(--paper);
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     @media (max-width: 900px) {
