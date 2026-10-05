@@ -58,3 +58,18 @@ code{font-size:.87em;overflow-wrap:anywhere}pre{background:#eaf0f7;padding:18px;
 @media(max-width:650px){.resource-bar{justify-content:flex-start;gap:20px}.method-tool-grid{grid-template-columns:1fr;gap:24px}.document table{min-width:570px}}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* Case-code key follows the specimen classification used in the tools. */
+.specimen-box{margin:22px 0 0;padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.document .specimen-box h3{margin:0 0 16px}
+.specimen-groups,.specimen-key{display:grid;grid-template-columns:.6fr 1.25fr 1.1fr .95fr;gap:12px;text-align:center}
+.specimen-groups{margin-bottom:10px;font-size:.8rem;color:var(--muted)}
+.specimen-groups span{border-bottom:1px solid #96b1c5;padding-bottom:5px}
+.specimen-groups span:first-child{grid-column:span 3}
+.specimen-key{margin:0 0 16px}
+.specimen-key>div{min-width:0}
+.specimen-key dt{position:relative;font-size:clamp(1.15rem,2.1vw,1.85rem);font-weight:650;line-height:1.35;border:1px solid #96b1c5;border-radius:5px;padding:4px 0}
+.specimen-key>div:not(:last-child) dt::after{content:".";position:absolute;right:-11px;bottom:4px}
+.specimen-key dd{margin:8px 0 0;font-size:.8rem;line-height:1.4;color:var(--muted)}
+.document .specimen-box p{font-size:.83rem;margin:6px 0 0}
+@media(max-width:650px){.specimen-box{padding:14px}.specimen-groups,.specimen-key{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.specimen-key dt{font-size:1.15rem}.specimen-key>div:not(:last-child) dt::after{right:-9px}.specimen-key dd{font-size:.73rem}}
