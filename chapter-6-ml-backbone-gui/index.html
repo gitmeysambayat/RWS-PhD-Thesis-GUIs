@@ -299,7 +299,7 @@
   .mlNote{ margin-top:8px; }
   .mlStatusOk{ color:var(--muted); }
   .mlStatusBad{ color:var(--bad); font-weight:700; }
-  #mlStatus, #mlLoaderStatus{ display:none !important; }
+
   .mlSubtle{ color:var(--muted); font-size:11px; }
   .mlBadge{
     display:inline-block;
@@ -420,20 +420,46 @@
   .benchRef{ margin-top:2px; }
   @media (max-width: 1300px){ .benchSummaryGrid, .benchTextRow{ grid-template-columns:1fr; } }
 
+
+  /* Portfolio navigation and narrow-screen access to scientific tables/plots. */
+  .portfolioNav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 8px;font:600 12px/1.5 system-ui,sans-serif;}
+  .portfolioNav a{color:#0b5cad;text-decoration:underline;text-underline-offset:3px;}
+  .demoNote{margin:8px 0 0;font-size:12px;line-height:1.5;color:#475569;max-width:1100px;}
+  :focus-visible{outline:3px solid #0b5cad;outline-offset:3px;}
+  h1.title{margin:0;}
+  main > section,.workspace,.card,.analysisGrid > *{min-width:0;}
+  .tableScroll,.plotScroll{max-width:100%;overflow-x:auto;}
+  .tableScroll{margin:8px 0;}
+  .tableScroll table{margin-top:0;}
+  @media(max-width:640px){
+    .headerRow{padding-right:0;min-height:0;}
+    .brandBox{position:static;margin-top:8px;}
+    .metaLine,#geomLine,#caseGuideNote,#caseSelHint,#caseMatrix caption,.thesis caption{white-space:normal;}
+    .specGrid{grid-template-columns:minmax(0,1fr) 8px minmax(0,1.15fr) 8px minmax(0,1fr) 8px minmax(0,1fr);}
+    .specSel{min-width:0;padding-left:2px;padding-right:2px;}
+    .specBottom{font-size:10px;}
+    .tableScroll table{min-width:430px;}
+    .plotScroll #plotSvg{min-width:600px;}
+    .modeCardHead,.seg,.plotHead{flex-wrap:wrap;}
+    .models label{white-space:normal;}
+    .row{flex-wrap:wrap;}
+  }
 </style>
 </head>
 <body>
 <header>
+  <nav class="portfolioNav" aria-label="Research portfolio"><a href="../index.html">All research tools</a><a href="../methods.html">Methods and limitations</a></nav>
   <div class="headerRow">
     <div class="titleWrap">
-      <div class="title">Interactive FE database and ML backbone prediction for circular Reduced Web Section (RWS) connections with isolated circular web openings (7,575 FE models).</div>
-      <div class="metaLine">Research and development: Meysam Bayat under supervision of Professor Konstantinos Daniel Tsavdaridis at City St George’s, University of London. For further information, see the linked RWS publications and preprint <a href="https://doi.org/10.3389/fbuil.2025.1592665" target="_blank" rel="noopener">[1]</a> <a href="https://doi.org/10.1002/cepa.70170" target="_blank" rel="noopener">[2]</a> <a href="https://doi.org/10.21203/rs.3.rs-8506924/v1" target="_blank" rel="noopener">[3]</a>.</div>
+      <h1 class="title">RWS beams: FE and ML backbone prediction (7,575 FE models)</h1>
+      <div class="metaLine">Meysam Bayat · City St George’s, University of London · Supervisor: Professor Konstantinos Daniel Tsavdaridis. Research sources: <a href="https://doi.org/10.3389/fbuil.2025.1592665" target="_blank" rel="noopener">[1]</a> <a href="https://doi.org/10.1002/cepa.70170" target="_blank" rel="noopener">[2]</a> <a href="https://doi.org/10.21203/rs.3.rs-8506924/v1" target="_blank" rel="noopener">[3]</a>.</div>
     </div>
     <div class="brandBox" aria-label="Laboratory and institutional logos">
       <img class="labBrand" src="3DMBC_logo.png" alt="3DMBC logo">
       <img class="cityBrand" src="city-st-georges-responsive-logo.svg" alt="City St George’s, University of London logo">
     </div>
   </div>
+  <p class="demoNote">Compare stored finite element (FE) backbones with machine-learning (ML) predictions. Exact FE comparisons require matching database inputs; agreement does not establish accuracy for unseen designs.</p>
 </header>
 
 <main>
@@ -441,13 +467,13 @@
     <div class="card compactCard" id="modeCard">
       <div class="modeCardHead">
         <div class="small muted">Mode</div>
-        <div class="seg" role="tablist" aria-label="Application mode">
+        <div class="seg" role="group" aria-label="Application mode">
           <button id="btnModeFe" class="active" type="button">FE benchmark mode</button>
           <button id="btnModeMl" type="button">ML prediction mode</button>
         </div>
       </div>
-      <div id="mlLoaderStatus" class="hide" aria-hidden="true"></div>
-      <input id="mlModelFile" class="hide" type="file" accept=".json,application/json">
+      <div id="mlLoaderStatus" class="hide" aria-hidden="true" role="status"></div>
+      <input id="mlModelFile" aria-label="Load an exported ML model JSON file" class="hide" type="file" accept=".json,application/json">
     </div>
 
     <div class="card" id="feInputCard">
@@ -458,7 +484,7 @@
           <div class="label">Profile (IPE)</div>
           <div class="value" id="valProfile">-</div>
         </div>
-        <input id="slProfile" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Beam profile (IPE)" id="slProfile" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="minProfile"> </span><span id="maxProfile"> </span></div>
       </div>
 
@@ -467,7 +493,7 @@
           <div class="label">Steel grade</div>
           <div class="value" id="valGrade">-</div>
         </div>
-        <input id="slGrade" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Steel grade" id="slGrade" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="minGrade"> </span><span id="maxGrade"> </span></div>
       </div>
 
@@ -476,7 +502,7 @@
           <div class="label">Span-to-depth ratio</div>
           <div class="value" id="valL">-</div>
         </div>
-        <input id="slL" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Span-to-depth ratio" id="slL" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="minL"> </span><span id="maxL"> </span></div>
       </div>
 
@@ -485,7 +511,7 @@
           <div class="label">Web opening, <span class="sym"><i>d</i><sub>o</sub>/<i>h</i></span> (%)</div>
           <div class="value" id="valDo">-</div>
         </div>
-        <input id="slDo" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Web opening diameter, d o over h, percent" id="slDo" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="minDo"> </span><span id="maxDo"> </span></div>
       </div>
 
@@ -494,7 +520,7 @@
           <div class="label">Web opening distance from column face, <span class="sym"><i>S</i>/<i>h</i></span> (%)</div>
           <div class="value" id="valSh">-</div>
         </div>
-        <input id="slSh" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Opening distance from column face, S over h, percent" id="slSh" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="minSh"> </span><span id="maxSh"> </span></div>
       </div>
 
@@ -519,7 +545,7 @@
           <div class="label">Profile (IPE)</div>
           <div class="value" id="mlValProfile">-</div>
         </div>
-        <input id="mlSlProfile" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Beam profile (IPE)" id="mlSlProfile" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="mlMinProfile"> </span><span id="mlMaxProfile"> </span></div>
       </div>
 
@@ -528,7 +554,7 @@
           <div class="label">Steel grade</div>
           <div class="value" id="mlValGrade">-</div>
         </div>
-        <input id="mlSlGrade" type="range" min="0" max="0" step="1" value="0">
+        <input aria-label="Steel grade" id="mlSlGrade" type="range" min="0" max="0" step="1" value="0">
         <div class="range-foot"><span id="mlMinGrade"> </span><span id="mlMaxGrade"> </span></div>
       </div>
 
@@ -537,7 +563,7 @@
           <div class="label">Span-to-depth ratio</div>
           <div class="value" id="mlValL">-</div>
         </div>
-        <input id="mlSlL" type="range" min="6" max="14" step="0.1" value="9">
+        <input aria-label="Span-to-depth ratio" id="mlSlL" type="range" min="6" max="14" step="0.1" value="9">
         <div class="range-foot"><span id="mlMinL">6</span><span id="mlMaxL">14</span></div>
       </div>
 
@@ -546,7 +572,7 @@
           <div class="label">Web opening, <span class="sym"><i>d</i><sub>o</sub>/<i>h</i></span> (%)</div>
           <div class="value" id="mlValDo">-</div>
         </div>
-        <input id="mlSlDo" type="range" min="0" max="75" step="0.5" value="50">
+        <input aria-label="Web opening diameter, d o over h, percent" id="mlSlDo" type="range" min="0" max="75" step="0.5" value="50">
         <div class="range-foot"><span id="mlMinDo">0</span><span id="mlMaxDo">75</span></div>
       </div>
 
@@ -555,7 +581,7 @@
           <div class="label">Web opening distance from column face, <span class="sym"><i>S</i>/<i>h</i></span> (%)</div>
           <div class="value" id="mlValSh">-</div>
         </div>
-        <input id="mlSlSh" type="range" min="0" max="240" step="1" value="140">
+        <input aria-label="Opening distance from column face, S over h, percent" id="mlSlSh" type="range" min="0" max="240" step="1" value="140">
         <div class="range-foot"><span id="mlMinSh">0</span><span id="mlMaxSh">240</span></div>
       </div>
 
@@ -563,7 +589,7 @@
         <div class="small muted">Load the ML model to enable free prediction mode.</div>
       </div>
 
-      <table id="mlTargetTable" style="margin-top:8px; display:none;">
+      <div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table id="mlTargetTable" style="margin-top:8px; display:none;">
         <thead>
           <tr>
             <th>&theta; (rad)</th>
@@ -572,7 +598,7 @@
           </tr>
         </thead>
         <tbody></tbody>
-      </table>
+      </table></div>
 
       <div class="small muted mlInputNote">Free ML mode allows continuous values within the model development domain. Exact FE benchmarking is available only when the current ML inputs coincide with a discrete FE case.</div>
     </div>
@@ -580,7 +606,7 @@
     <div class="card" id="feCaseCard">
       <h2>Case guide and specimen classification</h2>
 
-<table class="thesis case-matrix" id="caseMatrix">
+<div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table class="thesis case-matrix" id="caseMatrix">
   <caption>Parametric combinations of (<span class="sym"><i>S</i>/<i>h</i></span>) and (<span class="sym"><i>d</i><sub>o</sub>/<i>h</i></span>) in each batch of analysis</caption>
   <thead>
     <tr>
@@ -595,7 +621,7 @@
   <tbody>
     <tr><th class="rowhdr">60</th><td class="case-cell mono" data-do="30" data-sh="60" data-case="C00">C00</td><td class="case-cell mono" data-do="35" data-sh="60" data-case="C10">C10</td><td class="case-cell mono" data-do="40" data-sh="60" data-case="C20">C20</td><td class="case-cell mono" data-do="45" data-sh="60" data-case="C30">C30</td><td class="case-cell mono" data-do="50" data-sh="60" data-case="C40">C40</td><td class="case-cell mono" data-do="55" data-sh="60" data-case="C50">C50</td><td class="case-cell mono" data-do="60" data-sh="60" data-case="C60">C60</td><td class="case-cell mono" data-do="65" data-sh="60" data-case="C70">C70</td><td class="case-cell mono" data-do="70" data-sh="60" data-case="C80">C80</td><td class="case-cell mono" data-do="75" data-sh="60" data-case="C90">C90</td></tr><tr><th class="rowhdr">80</th><td class="case-cell mono" data-do="30" data-sh="80" data-case="C01">C01</td><td class="case-cell mono" data-do="35" data-sh="80" data-case="C11">C11</td><td class="case-cell mono" data-do="40" data-sh="80" data-case="C21">C21</td><td class="case-cell mono" data-do="45" data-sh="80" data-case="C31">C31</td><td class="case-cell mono" data-do="50" data-sh="80" data-case="C41">C41</td><td class="case-cell mono" data-do="55" data-sh="80" data-case="C51">C51</td><td class="case-cell mono" data-do="60" data-sh="80" data-case="C61">C61</td><td class="case-cell mono" data-do="65" data-sh="80" data-case="C71">C71</td><td class="case-cell mono" data-do="70" data-sh="80" data-case="C81">C81</td><td class="case-cell mono" data-do="75" data-sh="80" data-case="C91">C91</td></tr><tr><th class="rowhdr">100</th><td class="case-cell mono" data-do="30" data-sh="100" data-case="C02">C02</td><td class="case-cell mono" data-do="35" data-sh="100" data-case="C12">C12</td><td class="case-cell mono" data-do="40" data-sh="100" data-case="C22">C22</td><td class="case-cell mono" data-do="45" data-sh="100" data-case="C32">C32</td><td class="case-cell mono" data-do="50" data-sh="100" data-case="C42">C42</td><td class="case-cell mono" data-do="55" data-sh="100" data-case="C52">C52</td><td class="case-cell mono" data-do="60" data-sh="100" data-case="C62">C62</td><td class="case-cell mono" data-do="65" data-sh="100" data-case="C72">C72</td><td class="case-cell mono" data-do="70" data-sh="100" data-case="C82">C82</td><td class="case-cell mono" data-do="75" data-sh="100" data-case="C92">C92</td></tr><tr><th class="rowhdr">120</th><td class="case-cell mono" data-do="30" data-sh="120" data-case="C03">C03</td><td class="case-cell mono" data-do="35" data-sh="120" data-case="C13">C13</td><td class="case-cell mono" data-do="40" data-sh="120" data-case="C23">C23</td><td class="case-cell mono" data-do="45" data-sh="120" data-case="C33">C33</td><td class="case-cell mono" data-do="50" data-sh="120" data-case="C43">C43</td><td class="case-cell mono" data-do="55" data-sh="120" data-case="C53">C53</td><td class="case-cell mono" data-do="60" data-sh="120" data-case="C63">C63</td><td class="case-cell mono" data-do="65" data-sh="120" data-case="C73">C73</td><td class="case-cell mono" data-do="70" data-sh="120" data-case="C83">C83</td><td class="case-cell mono" data-do="75" data-sh="120" data-case="C93">C93</td></tr><tr><th class="rowhdr">140</th><td class="case-cell mono" data-do="30" data-sh="140" data-case="C04">C04</td><td class="case-cell mono" data-do="35" data-sh="140" data-case="C14">C14</td><td class="case-cell mono" data-do="40" data-sh="140" data-case="C24">C24</td><td class="case-cell mono" data-do="45" data-sh="140" data-case="C34">C34</td><td class="case-cell mono" data-do="50" data-sh="140" data-case="C44">C44</td><td class="case-cell mono" data-do="55" data-sh="140" data-case="C54">C54</td><td class="case-cell mono" data-do="60" data-sh="140" data-case="C64">C64</td><td class="case-cell mono" data-do="65" data-sh="140" data-case="C74">C74</td><td class="case-cell mono" data-do="70" data-sh="140" data-case="C84">C84</td><td class="case-cell mono" data-do="75" data-sh="140" data-case="C94">C94</td></tr><tr><th class="rowhdr">160</th><td class="case-cell mono" data-do="30" data-sh="160" data-case="C05">C05</td><td class="case-cell mono" data-do="35" data-sh="160" data-case="C15">C15</td><td class="case-cell mono" data-do="40" data-sh="160" data-case="C25">C25</td><td class="case-cell mono" data-do="45" data-sh="160" data-case="C35">C35</td><td class="case-cell mono" data-do="50" data-sh="160" data-case="C45">C45</td><td class="case-cell mono" data-do="55" data-sh="160" data-case="C55">C55</td><td class="case-cell mono" data-do="60" data-sh="160" data-case="C65">C65</td><td class="case-cell mono" data-do="65" data-sh="160" data-case="C75">C75</td><td class="case-cell mono" data-do="70" data-sh="160" data-case="C85">C85</td><td class="case-cell mono" data-do="75" data-sh="160" data-case="C95">C95</td></tr><tr><th class="rowhdr">180</th><td class="case-cell mono" data-do="30" data-sh="180" data-case="C06">C06</td><td class="case-cell mono" data-do="35" data-sh="180" data-case="C16">C16</td><td class="case-cell mono" data-do="40" data-sh="180" data-case="C26">C26</td><td class="case-cell mono" data-do="45" data-sh="180" data-case="C36">C36</td><td class="case-cell mono" data-do="50" data-sh="180" data-case="C46">C46</td><td class="case-cell mono" data-do="55" data-sh="180" data-case="C56">C56</td><td class="case-cell mono" data-do="60" data-sh="180" data-case="C66">C66</td><td class="case-cell mono" data-do="65" data-sh="180" data-case="C76">C76</td><td class="case-cell mono" data-do="70" data-sh="180" data-case="C86">C86</td><td class="case-cell mono" data-do="75" data-sh="180" data-case="C96">C96</td></tr><tr><th class="rowhdr">200</th><td class="case-cell mono" data-do="30" data-sh="200" data-case="C07">C07</td><td class="case-cell mono" data-do="35" data-sh="200" data-case="C17">C17</td><td class="case-cell mono" data-do="40" data-sh="200" data-case="C27">C27</td><td class="case-cell mono" data-do="45" data-sh="200" data-case="C37">C37</td><td class="case-cell mono" data-do="50" data-sh="200" data-case="C47">C47</td><td class="case-cell mono" data-do="55" data-sh="200" data-case="C57">C57</td><td class="case-cell mono" data-do="60" data-sh="200" data-case="C67">C67</td><td class="case-cell mono" data-do="65" data-sh="200" data-case="C77">C77</td><td class="case-cell mono" data-do="70" data-sh="200" data-case="C87">C87</td><td class="case-cell mono" data-do="75" data-sh="200" data-case="C97">C97</td></tr><tr><th class="rowhdr">220</th><td class="case-cell mono" data-do="30" data-sh="220" data-case="C08">C08</td><td class="case-cell mono" data-do="35" data-sh="220" data-case="C18">C18</td><td class="case-cell mono" data-do="40" data-sh="220" data-case="C28">C28</td><td class="case-cell mono" data-do="45" data-sh="220" data-case="C38">C38</td><td class="case-cell mono" data-do="50" data-sh="220" data-case="C48">C48</td><td class="case-cell mono" data-do="55" data-sh="220" data-case="C58">C58</td><td class="case-cell mono" data-do="60" data-sh="220" data-case="C68">C68</td><td class="case-cell mono" data-do="65" data-sh="220" data-case="C78">C78</td><td class="case-cell mono" data-do="70" data-sh="220" data-case="C88">C88</td><td class="case-cell mono" data-do="75" data-sh="220" data-case="C98">C98</td></tr><tr><th class="rowhdr">240</th><td class="case-cell mono" data-do="30" data-sh="240" data-case="C09">C09</td><td class="case-cell mono" data-do="35" data-sh="240" data-case="C19">C19</td><td class="case-cell mono" data-do="40" data-sh="240" data-case="C29">C29</td><td class="case-cell mono" data-do="45" data-sh="240" data-case="C39">C39</td><td class="case-cell mono" data-do="50" data-sh="240" data-case="C49">C49</td><td class="case-cell mono" data-do="55" data-sh="240" data-case="C59">C59</td><td class="case-cell mono" data-do="60" data-sh="240" data-case="C69">C69</td><td class="case-cell mono" data-do="65" data-sh="240" data-case="C79">C79</td><td class="case-cell mono" data-do="70" data-sh="240" data-case="C89">C89</td><td class="case-cell mono" data-do="75" data-sh="240" data-case="C99">C99</td></tr>
   </tbody>
-</table>
+</table></div>
 <div class="small muted" id="caseGuideNote" style="margin-top:6px;">
   C00 to C99 are reduced web section opening cases as shown in the matrix above. C100 is the full section.
 </div>
@@ -606,7 +632,7 @@
 
       <div class="divider"></div>
 
-<table class="thesis">
+<div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table class="thesis">
   <caption>Table 1.6: Variables and modelling options</caption>
   <thead>
     <tr>
@@ -642,7 +668,7 @@
       <td style="font-weight:700;">7575</td>
     </tr>
   </tbody>
-</table>
+</table></div>
 
       <div class="divider"></div>
 
@@ -696,14 +722,14 @@
         </div>
       </div>
 
-      <svg id="plotSvg" viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Backbone curve plot"></svg>
+      <div class="plotScroll" role="region" aria-label="Backbone plot; scroll horizontally on small screens" tabindex="0"><svg id="plotSvg" viewBox="0 0 760 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Backbone curve plot"></svg></div>
       <div class="legend" id="legend"></div>
     </div>
 
 
 
     <div class="card" id="mlBenchCard">
-      <h2>ML benchmark and validation</h2>
+      <h2>ML benchmark comparison</h2>
       <div class="btnrow">
         <button id="btnMlBench">Run full FE benchmark</button>
         <div class="small muted hide" id="mlStatus" aria-hidden="true">Loading ML model...</div>
@@ -718,7 +744,7 @@
       </div>
 
       <div class="benchTableWrap">
-      <table id="mlKeyCompareTable">
+      <div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table id="mlKeyCompareTable">
         <thead>
           <tr>
             <th>&theta; (rad)</th>
@@ -729,7 +755,7 @@
           </tr>
         </thead>
         <tbody></tbody>
-      </table>
+      </table></div>
       </div>
 
       <div class="infobox" id="mlGlobalBox" style="margin-top:10px;">
@@ -791,9 +817,9 @@
 
     <div class="card" id="feOutputCard">
       <h2>FE outputs</h2>
-      <table class="twoCol">
+      <div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table class="twoCol">
         <tbody id="outTable"></tbody>
-      </table>
+      </table></div>
     </div>
   </section>
 </main>
@@ -1179,6 +1205,16 @@
     return keyToIndex.get(comboKey(sel.L, sel.pIdx, sel.gIdx, sel.do, sel.sh));
   }
 
+  // Summary fields cannot establish a response at a missing backbone ordinate.
+  function hasFeOrdinate(r, theta) {
+    const idx = thetaRad.indexOf(theta);
+    return idx >= 0 && Number.isFinite(r[schema.backbone_M_kNm][idx]);
+  }
+
+  function availableFeScalar(r, theta, field) {
+    return hasFeOrdinate(r, theta) ? r[field] : NaN;
+  }
+
   function updateOutputs(r) {
     const vm = r[schema.VonMises_CF_norm];
     const pq = r[schema.PEEQ_CF_norm];
@@ -1188,8 +1224,8 @@
     const out = [
       {lab:'<span class="sym"><i>M</i><sub>y</sub></span> (kN·m)', val: fmt1(r[schema.My_kNm])},
       {lab:'<span class="sym"><i>M</i><sub>c</sub></span> (kN·m)', val: fmt1(r[schema.Mc_kNm])},
-      {lab:'<span class="sym"><i>M</i><sub>0.04</sub></span> (kN·m)', val: fmt1(r[schema.M0_04_kNm])},
-      {lab:'<span class="sym"><i>M</i><sub>0.06</sub></span> (kN·m)', val: fmt1(r[schema.M0_06_kNm])},
+      {lab:'<span class="sym"><i>M</i><sub>0.04</sub></span> (kN·m)', val: fmt1(availableFeScalar(r, 0.04, schema.M0_04_kNm))},
+      {lab:'<span class="sym"><i>M</i><sub>0.06</sub></span> (kN·m)', val: fmt1(availableFeScalar(r, 0.06, schema.M0_06_kNm))},
       {lab:'<span class="sym"><i>M</i><sub>p</sub></span> (kN·m)', val: fmt1(r[schema.Mp_kNm])},
       {lab:'<span class="sym"><i>M</i><sub>p,RWS</sub></span> (kN·m)', val: fmt1(r[schema.Mp_RWS_kNm])},
       {lab:'<span class="sym"><i>θ</i><sub>y</sub></span> (rad)', val: fmt5(r[schema.theta_y_rad])},
@@ -1220,7 +1256,7 @@
 
     if (el.qualMp) {
       el.qualMp.innerHTML = '';
-      el.qualMp.appendChild(badge(r[schema.Qual_vs_Mp]));
+      el.qualMp.appendChild(badge(hasFeOrdinate(r, 0.04) ? r[schema.Qual_vs_Mp] : 'N/A'));
     }
     if (el.qualThetaU) {
       el.qualThetaU.innerHTML = '';
@@ -1228,7 +1264,7 @@
     }
     if (el.qualMpRws) el.qualMpRws.innerHTML = '';
 
-    const m1 = r[schema.Margin_vs_0_8Mp];
+    const m1 = availableFeScalar(r, 0.04, schema.Margin_vs_0_8Mp);
     const m1s = Number.isFinite(m1) ? m1.toFixed(3) : 'N/A';
     if (el.qualMargins) {
       el.qualMargins.innerHTML = `Benchmark ratio: <span class="sym"><i>M</i><sub>0.04</sub></span>/0.8<span class="sym"><i>M</i><sub>p</sub></span> = <span class="mono">${m1s}</span>.`;
@@ -1254,7 +1290,7 @@
     }
     if (missing.length) {
       el.warn.style.display = 'block';
-      el.warn.textContent = `Backbone has missing points at rotations: ${missing.map(x=>x.toFixed(2)).join(', ')} rad.`;
+      el.warn.textContent = `Backbone has missing points at rotations: ${missing.map(x=>x.toFixed(2)).join(', ')} rad. Corresponding moments, comparisons and threshold checks are unavailable; the missing response does not establish a pass or failure.`;
     } else {
       el.warn.style.display = 'none';
       el.warn.textContent = '';
@@ -1488,9 +1524,9 @@
       el.mlStatus.setAttribute('aria-hidden', 'true');
     }
     if (el.mlLoaderStatus) {
-      el.mlLoaderStatus.textContent = '';
-      el.mlLoaderStatus.className = 'hide';
-      el.mlLoaderStatus.setAttribute('aria-hidden', 'true');
+      el.mlLoaderStatus.textContent = text;
+      el.mlLoaderStatus.className = text ? ('small ' + (good ? 'mlStatusOk' : 'mlStatusBad')) : 'hide';
+      el.mlLoaderStatus.setAttribute('aria-hidden', String(!text));
     }
   }
 
@@ -1763,10 +1799,7 @@
 
   function getFeMomentAtTheta(r, theta) {
     const idx = thetaRad.indexOf(theta);
-    let feVal = (idx >= 0) ? r[schema.backbone_M_kNm][idx] : NaN;
-    if (!Number.isFinite(feVal) && theta === 0.04 && Number.isFinite(r[schema.M0_04_kNm])) feVal = r[schema.M0_04_kNm];
-    if (!Number.isFinite(feVal) && theta === 0.06 && Number.isFinite(r[schema.M0_06_kNm])) feVal = r[schema.M0_06_kNm];
-    return feVal;
+    return hasFeOrdinate(r, theta) ? r[schema.backbone_M_kNm][idx] : NaN;
   }
 
   function benchmarkMetrics(feCurve, mlCurve, Mp) {
@@ -1816,6 +1849,9 @@
   }
 
   function computeUltimateRotationFromCurve(curve) {
+    if (thetaRad.some((theta, i) => theta >= 0 && !Number.isFinite(curve[i]))) {
+      return {theta: NaN, Mc: NaN, Mu: NaN, reached: false, thetaPeak: NaN, incomplete: true};
+    }
     const pts = [];
     for (let i = 0; i < thetaRad.length; i++) {
       const th = thetaRad[i];
@@ -1867,11 +1903,13 @@
   }
 
   function ultimateThetaSuffix(info) {
+    if (info && info.incomplete) return ' (unavailable: incomplete positive backbone)';
     if (!info || !Number.isFinite(info.theta)) return '';
     return info.reached ? '' : ' (20% drop not reached within the available backbone window)';
   }
 
   function matchBadge(match) {
+    if (match === null) return '<span class="mlBadge">comparison unavailable</span>';
     const cls = match ? 'match' : 'mismatch';
     const text = match ? 'match' : 'mismatch';
     return `<span class="mlBadge ${cls}">${text}</span>`;
@@ -1983,7 +2021,7 @@
         <div class="metricTile"><div class="k"><span class="sym"><i>M</i><sub>0.04</sub></span></div><div class="v">${fmt2(m04)} kN·m</div></div>
         <div class="metricTile"><div class="k"><span class="sym"><i>M</i><sub>0.06</sub></span></div><div class="v">${fmt2(m06)} kN·m</div></div>
       </div>
-      <div class="small" style="margin-top:8px;">Prequalification benchmark: strength retention ${badgeHtml(qualStrength)} based on <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>, drift capacity ${badgeHtml(qualDrift)} based on <span class="sym"><i>θ</i><sub>u</sub></span> ≥ 0.04 rad.</div>
+      <div class="small" style="margin-top:8px;">Research threshold comparison: strength retention ${badgeHtml(qualStrength)} based on <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>, drift capacity ${badgeHtml(qualDrift)} based on <span class="sym"><i>θ</i><sub>u</sub></span> ≥ 0.04 rad.</div>
       <div class="small muted" style="margin-top:6px;">Ultimate rotation from the 20% drop in <span class="sym"><i>M</i><sub>c</sub></span>: <span class="sym"><i>θ</i><sub>u</sub></span> = <span class="mono">${ultimateThetaHtml(thetaU)}</span> rad${ultimateThetaSuffix(thetaU)}.</div>
       <div class="small muted" style="margin-top:6px;">${exactText}</div>
     `;
@@ -2045,21 +2083,21 @@
     const idx04 = thetaRad.indexOf(0.04);
     const idx06 = thetaRad.indexOf(0.06);
 
-    const feM04 = r[schema.M0_04_kNm];
-    const feM06 = r[schema.M0_06_kNm];
+    const feM04 = availableFeScalar(r, 0.04, schema.M0_04_kNm);
+    const feM06 = availableFeScalar(r, 0.06, schema.M0_06_kNm);
     const mlM04 = pred.M[idx04];
     const mlM06 = pred.M[idx06];
 
     const feThetaU = computeUltimateRotationFromCurve(feCurve);
     const mlThetaU = computeUltimateRotationFromCurve(pred.M);
 
-    const feQualMp = r[schema.Qual_vs_Mp];
+    const feQualMp = hasFeOrdinate(r, 0.04) ? r[schema.Qual_vs_Mp] : 'N/A';
     const mlQualMp = qualFromMoment(mlM04, r[schema.Mp_kNm]);
     const feQualTheta = qualFromUltimateTheta(feThetaU);
     const mlQualTheta = qualFromUltimateTheta(mlThetaU);
 
-    const matchMp = (feQualMp === mlQualMp);
-    const matchTheta = (feQualTheta === mlQualTheta);
+    const matchMp = feQualMp === 'N/A' ? null : (feQualMp === mlQualMp);
+    const matchTheta = feQualTheta === 'N/A' ? null : (feQualTheta === mlQualTheta);
 
     el.mlSummary.innerHTML = `
       ${summaryLead}
@@ -2079,7 +2117,7 @@
         <span class="sym"><i>θ</i><sub>u</sub></span> from the 20% drop in <span class="sym"><i>M</i><sub>c</sub></span>: FE = <span class="mono">${ultimateThetaHtml(feThetaU)}</span> rad, ML = <span class="mono">${ultimateThetaHtml(mlThetaU)}</span> rad.
       </div>
       <div class="small" style="margin-top:4px;">
-        Prequalification benchmark: strength retention FE ${feQualMp}, ML ${mlQualMp} ${matchBadge(matchMp)} based on <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>; drift capacity FE ${feQualTheta}, ML ${mlQualTheta} ${matchBadge(matchTheta)} based on <span class="sym"><i>θ</i><sub>u</sub></span> ≥ 0.04 rad.
+        Research threshold comparison: strength retention FE ${feQualMp}, ML ${mlQualMp} ${matchBadge(matchMp)} based on <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>; drift capacity FE ${feQualTheta}, ML ${mlQualTheta} ${matchBadge(matchTheta)} based on <span class="sym"><i>θ</i><sub>u</sub></span> ≥ 0.04 rad.
       </div>
     `;
 
@@ -2156,6 +2194,7 @@
     const g = ml.lastGlobal;
     el.mlGlobalBox.innerHTML = `
       <div class="small"><strong>Full FE benchmark (${g.rows} models)</strong></div>
+      <div class="small muted">Available comparisons: ${g.validCount} backbone ordinates; ${g.m04Count} cases at 0.04 rad; ${g.m06Count} cases at 0.06 rad; ${g.thetaUCount} ultimate rotations. Strength and drift agreement use ${g.strengthCount} and ${g.driftCount} cases respectively. Missing FE responses are excluded.</div>
       <div class="small" style="margin-top:4px;">
         Mean absolute error = ${fmt2(g.mae)} kN·m,
         RMSE = ${fmt2(g.rmse)} kN·m,
@@ -2168,7 +2207,7 @@
         mean |&Delta;<span class="sym"><i>θ</i><sub>u</sub></span>| = ${fmt5(g.thetaUMae)} rad.
       </div>
       <div class="small" style="margin-top:4px;">
-        Prequalification benchmark agreement = ${fmt2(g.qualMpAgree)}% against <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>,
+        Strength-threshold agreement = ${fmt2(g.qualMpAgree)}% against <span class="sym"><i>M</i><sub>0.04</sub></span> ≥ 0.8<span class="sym"><i>M</i><sub>p</sub></span>,
         drift-capacity benchmark agreement = ${fmt2(g.qualThetaAgree)}% against <span class="sym"><i>θ</i><sub>u</sub></span> ≥ 0.04 rad.
       </div>
     `;
@@ -2197,6 +2236,8 @@
     let thetaUCount = 0;
     let agreeMp = 0;
     let agreeTheta = 0;
+    let strengthCount = 0;
+    let driftCount = 0;
 
     for (let i = 0; i < rows.length; i++) {
       const r = rows[i];
@@ -2236,13 +2277,13 @@
 
       r2Vals.push(ssTot > 0 ? (1 - (ssRes / ssTot)) : NaN);
 
-      if (Number.isFinite(r[schema.M0_04_kNm]) && Number.isFinite(mlCurve[idx04])) {
-        m04AbsSum += Math.abs(mlCurve[idx04] - r[schema.M0_04_kNm]);
+      if (Number.isFinite(availableFeScalar(r, 0.04, schema.M0_04_kNm)) && Number.isFinite(mlCurve[idx04])) {
+        m04AbsSum += Math.abs(mlCurve[idx04] - availableFeScalar(r, 0.04, schema.M0_04_kNm));
         m04Count += 1;
       }
 
-      if (Number.isFinite(r[schema.M0_06_kNm]) && Number.isFinite(mlCurve[idx06])) {
-        m06AbsSum += Math.abs(mlCurve[idx06] - r[schema.M0_06_kNm]);
+      if (Number.isFinite(availableFeScalar(r, 0.06, schema.M0_06_kNm)) && Number.isFinite(mlCurve[idx06])) {
+        m06AbsSum += Math.abs(mlCurve[idx06] - availableFeScalar(r, 0.06, schema.M0_06_kNm));
         m06Count += 1;
       }
 
@@ -2256,8 +2297,14 @@
       const mlQualMp = qualFromMoment(mlCurve[idx04], r[schema.Mp_kNm]);
       const feQualTheta = qualFromUltimateTheta(feThetaU);
       const mlQualTheta = qualFromUltimateTheta(mlThetaU);
-      if (mlQualMp === r[schema.Qual_vs_Mp]) agreeMp += 1;
-      if (mlQualTheta === feQualTheta) agreeTheta += 1;
+      if (hasFeOrdinate(r, 0.04) && mlQualMp !== 'N/A') {
+        strengthCount += 1;
+        if (mlQualMp === r[schema.Qual_vs_Mp]) agreeMp += 1;
+      }
+      if (feQualTheta !== 'N/A' && mlQualTheta !== 'N/A') {
+        driftCount += 1;
+        if (mlQualTheta === feQualTheta) agreeTheta += 1;
+      }
 
       if ((i + 1) % 50 === 0 || i === rows.length - 1) {
         if (el.mlGlobalBox) {
@@ -2284,8 +2331,9 @@
       m04Mae: m04Count ? (m04AbsSum / m04Count) : NaN,
       m06Mae: m06Count ? (m06AbsSum / m06Count) : NaN,
       thetaUMae: thetaUCount ? (thetaUAbsSum / thetaUCount) : NaN,
-      qualMpAgree: 100 * agreeMp / rows.length,
-      qualThetaAgree: 100 * agreeTheta / rows.length,
+      qualMpAgree: strengthCount ? 100 * agreeMp / strengthCount : NaN,
+      qualThetaAgree: driftCount ? 100 * agreeTheta / driftCount : NaN,
+      strengthCount, driftCount, m04Count, m06Count, thetaUCount,
     };
 
     renderMlGlobalSummary();
@@ -2317,11 +2365,11 @@
     const feMode = app.mode === 'fe';
     if (el.btnModeFe) {
       el.btnModeFe.classList.toggle('active', feMode);
-      el.btnModeFe.setAttribute('aria-selected', feMode ? 'true' : 'false');
+      el.btnModeFe.setAttribute('aria-pressed', feMode ? 'true' : 'false');
     }
     if (el.btnModeMl) {
       el.btnModeMl.classList.toggle('active', !feMode);
-      el.btnModeMl.setAttribute('aria-selected', !feMode ? 'true' : 'false');
+      el.btnModeMl.setAttribute('aria-pressed', !feMode ? 'true' : 'false');
     }
     if (el.feInputCard) el.feInputCard.classList.toggle('hide', !feMode);
     if (el.feCaseCard) el.feCaseCard.classList.toggle('hide', !feMode);
@@ -2441,7 +2489,7 @@
     if (lastErr) console.error(lastErr);
     ml.ready = false;
     ml.model = null;
-    setMlStatus('Model file not found. Use Retry or Load model file.', false);
+    setMlStatus('ML model unavailable. Reload the page to retry; FE database results remain available.', false);
     if (el.mlSummary) {
       el.mlSummary.innerHTML = '<div class="small muted">Add <span class="mono">xgb_model.json</span> to the same folder as this page.</div>';
     }
@@ -2627,7 +2675,7 @@
     if (showKeyPoints) {
       if (app.mode === 'fe' && app.showFe && activeCurve >= 0 && activeCurve < curves.length) {
         const rkp = rows[curves[activeCurve].rowIndex];
-        const kpVals = [rkp[schema.My_kNm], rkp[schema.Mc_kNm], rkp[schema.M0_04_kNm], rkp[schema.M0_06_kNm]];
+        const kpVals = [rkp[schema.My_kNm], rkp[schema.Mc_kNm], availableFeScalar(rkp, 0.04, schema.M0_04_kNm), availableFeScalar(rkp, 0.06, schema.M0_06_kNm)];
         for (const v of kpVals) if (isFinite(v)) yMaxAbs = Math.max(yMaxAbs, Math.abs(v));
       } else if (app.mode === 'ml' && app.showMl && ml.ready && ml.model) {
         const pred = predictMlCurveFromInput();
@@ -2763,8 +2811,8 @@
         points.push(
           {x: r[schema.theta_y_rad], y: r[schema.My_kNm], label:'My'},
           {x: r[schema.theta_c_rad], y: r[schema.Mc_kNm], label:'Mc'},
-          {x: 0.04, y: r[schema.M0_04_kNm], label:'M0.04'},
-          {x: 0.06, y: r[schema.M0_06_kNm], label:'M0.06'}
+          {x: 0.04, y: availableFeScalar(r, 0.04, schema.M0_04_kNm), label:'M0.04'},
+          {x: 0.06, y: availableFeScalar(r, 0.06, schema.M0_06_kNm), label:'M0.06'}
         );
       } else if (app.mode === 'ml' && app.showMl && ml.ready && ml.model) {
         const pred = predictMlCurveFromInput();
@@ -3097,6 +3145,32 @@
   readSelFromSliders();
   updateAll();
 
+})();
+</script>
+
+<script>
+(() => {
+  document.querySelectorAll('td.case-cell').forEach(cell => {
+    cell.tabIndex = 0;
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('aria-label', `Case ${cell.dataset.case}: opening ${cell.dataset.do}% of depth, distance ${cell.dataset.sh}% of depth`);
+    const sync = () => {
+      cell.setAttribute('aria-pressed', String(cell.classList.contains('sel')));
+      cell.setAttribute('aria-disabled', String(cell.classList.contains('disabled')));
+    };
+    sync();
+    new MutationObserver(sync).observe(cell, {attributes:true, attributeFilter:['class']});
+    cell.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {event.preventDefault();cell.click();}
+    });
+  });
+  document.querySelectorAll('.control input[type="range"]').forEach(input => {
+    const value = input.closest('.control').querySelector('.value');
+    if (!value) return;
+    const sync = () => input.setAttribute('aria-valuetext', value.textContent.trim());
+    sync();
+    new MutationObserver(sync).observe(value, {childList:true, characterData:true, subtree:true});
+  });
 })();
 </script>
 </body>

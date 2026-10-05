@@ -1,34 +1,27 @@
-# Reduced Web Section Explorer
+# Reduced Web Section Beams Explorer
 
-![Reduced Web Section Explorer screenshot](screenshots/20260605_v1_RWSExplorer.png)
+Compare saved finite element (FE) backbones, response measures and contour images for circular Reduced Web Section (RWS) connections.
 
-## Live GUI
+**[Open the Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/)** · [Methods and limitations](../../methods.html) · [All tools](../../README.md)
 
-[Open the Reduced Web Section Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/)
+![Explorer showing case controls, backbone response and contour images](../../screenshots/20261005_RWSExplorer.png)
 
-## Purpose
+## Use
 
-This complementary thesis GUI supports rapid interrogation of the finite element database and database-driven synthesis workflow developed across the FE modelling, database generation, and synthesis chapters. It is designed for circular Reduced Web Section (RWS) connection screening, with controls for beam profile, steel grade, span-to-depth ratio, opening diameter ratio <i>d</i><sub>o</sub>/<i>h</i>, and opening distance ratio <i>S</i>/<i>h</i>.
+1. Choose an IPE profile, steel grade and span-to-depth setting.
+2. Select an opening case from the matrix or geometry controls. **C100** selects the full-section reference.
+3. Press **Add curve** before changing cases to retain the current curve. The first curve follows the controls. Use **Key points** to show characteristic moments; export as SVG or PNG.
+4. Inspect von Mises and equivalent plastic strain (PEEQ) contours.
 
-The interface reports backbone response, characteristic moments, column-face von Mises stress, column-face PEEQ, and qualification-style margin indicators. Where contour assets are available, the selected case also displays von Mises and PEEQ contour images.
+The database holds 7,575 cases, with moment in kN·m and rotation in rad. Selection retrieves stored results; it does not run FE analyses. Case `6.500.S235.C00` lacks backbone ordinates from ±0.03 to ±0.06 rad.
 
-## Engineering Context
+The strength-retention check alone does not establish connection qualification or design compliance.
 
-RWS connections are a beam-weakening retrofit concept in which a web opening is used to attract inelastic action away from the beam-column interface while preserving the beam flanges [1]. This GUI is a screening and visualisation tool, not a replacement for project-specific seismic assessment, detailing checks, or code-mandated qualification.
+## Files and local use
 
-## Repository Contents
+- `index.html`: interface, embedded FE dataset and JavaScript/SVG plotting.
+- `contours/`: case-labelled von Mises and PEEQ images, organised by grade and profile.
 
-- `index.html`: standalone GUI with embedded FE-derived response data.
-- `contours/`: von Mises and PEEQ contour image assets.
-- `3DMBC_logo.png`, `city-st-georges-responsive-logo.svg`, `favicon_3dmbc.png`: branding and icon assets.
-- `screenshots/20260605_v1_RWSExplorer.png`: README screenshot.
+From the **repository root**, run `python3 -m http.server 8000 --bind 127.0.0.1`, then open [the local Explorer](http://127.0.0.1:8000/database-guis/rws-explorer/). No build step is required.
 
-## Local Use
-
-Open `index.html` directly in a browser or serve the repository root with any static HTTP server. No build step is required.
-
-## References
-
-[1] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "A case study for optimising the geometry and moment capacity of code compliant welded RWS connections," *Frontiers in Built Environment*, 2025. DOI: [10.3389/fbuil.2025.1592665](https://doi.org/10.3389/fbuil.2025.1592665).
-
-[2] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading," *ce/papers*, 2025. DOI: [10.1002/cepa.70170](https://doi.org/10.1002/cepa.70170).
+By Meysam Bayat. [Research sources and reuse terms](../../README.md#repository-and-research-sources).

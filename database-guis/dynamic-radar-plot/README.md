@@ -1,34 +1,26 @@
-# RWS Connections Dynamic Radar Plot
+# RWS dynamic radar comparison
 
-![RWS dynamic radar plot screenshot](screenshots/20260605_v1_RadarPlot.png)
+Filter and rank saved finite element (FE) results to shortlist circular Reduced Web Section (RWS) configurations for optimisation studies.
 
-## Live GUI
+**[Open the radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/)** · [Methods and limitations](../../methods.html) · [All tools](../../README.md)
 
-[Open the RWS dynamic radar plot](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/)
+![Radar comparison with response filters and selected case outlines](../../screenshots/20261005_RadarPlot.png)
 
-## Purpose
+## Use and interpretation
 
-This complementary thesis GUI compares RWS connection cases using a radar plot with fixed global metric ranges. It supports design-oriented interrogation of the FE database and database-driven synthesis workflow. The embedded app data defines the plotted spokes as PEEQ at the column face, von Mises stress at the column face, cumulative energy, degradation, <i>&theta;</i>(0.6), and <i>M</i><sub>c</sub>.
+Choose profile, grade and span-to-depth filters, then adjust the numerical ranges. **Top N** limits the plotted cases; the counter reports the full filtered set.
 
-The filter panel supports profile, steel grade, top-N selection, primary normalised filters, and secondary filters. The CSV export button downloads the currently filtered dataset.
+The six spokes are column-face PEEQ, normalised column-face von Mises response, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section. PEEQ denotes equivalent plastic strain.
 
-## Engineering Context
+Fixed global ranges keep scales consistent. The preferred direction is outward, and polygon area determines rank. Ranking depends on the metric definitions, ranges and spoke order; it does not establish an optimum or connection qualification.
 
-RWS connections are used to move inelastic demand away from the beam-column interface by weakening the beam web rather than the flanges [1]. The radar plot is intended for comparative screening only. It should be read together with the underlying backbone response, energy dissipation, and column-face demand evidence.
+**Download Filtered CSV** requests a password and exports the full filtered set, including cases beyond Top N. Incomplete case `6.500.S235.C00` is excluded from ranking and export; the stored data and global ranges are retained. This tool runs no FE analysis or ML inference.
 
-## Repository Contents
+## Files and local use
 
-- `index.html`: redirect entry point for GitHub Pages.
-- `RWS_radar_dynamic.html`: standalone Plotly-based radar GUI with embedded data.
-- `3DMBC_logo.png`, `city-st-georges-responsive-logo.svg`, `favicon_3dmbc.png`: branding and icon assets.
-- `screenshots/20260605_v1_RadarPlot.png`: README screenshot.
+- `index.html`: entry point redirecting to the application.
+- `RWS_radar_dynamic.html`: embedded dataset, filtering, radar scoring and CSV export.
 
-## Local Use
+From the **repository root**, run `python3 -m http.server 8000 --bind 127.0.0.1`, then open [the local radar comparison](http://127.0.0.1:8000/database-guis/dynamic-radar-plot/). Internet access is needed for Plotly.js and noUiSlider, loaded from public CDNs.
 
-Open `index.html` or `RWS_radar_dynamic.html` directly in a browser, or serve the repository root with any static HTTP server. The page uses Plotly and noUiSlider from public CDNs.
-
-## References
-
-[1] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "A case study for optimising the geometry and moment capacity of code compliant welded RWS connections," *Frontiers in Built Environment*, 2025. DOI: [10.3389/fbuil.2025.1592665](https://doi.org/10.3389/fbuil.2025.1592665).
-
-[2] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading," *ce/papers*, 2025. DOI: [10.1002/cepa.70170](https://doi.org/10.1002/cepa.70170).
+By Meysam Bayat. [Research sources and reuse terms](../../README.md#repository-and-research-sources).
