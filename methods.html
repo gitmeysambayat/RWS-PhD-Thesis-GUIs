@@ -11,9 +11,7 @@
 <header class="site-header"><div class="wrap header-row">
   <nav aria-label="Main navigation"><a href="./#tools">Tools</a><a href="methods.html" aria-current="page">Methods &amp; use</a><a href="https://github.com/gitmeysambayat/RWS-PhD-Thesis-GUIs">Source code <span aria-hidden="true">↗</span></a></nav>
 </div></header>
-<main class="wrap document" id="main">
-  <h1>Methods and use</h1>
-  <nav class="contents" aria-label="On this page"><a href="#walkthrough">Walkthrough</a><a href="#coverage">Dataset</a><a href="#tools">How the tools work</a><a href="#sources">Sources &amp; reuse</a></nav>
+<main class="wrap document" id="main" aria-label="Methods and use">
   <section id="walkthrough" aria-labelledby="walkthrough-title">
     <h2 id="walkthrough-title">Quick start</h2>
     <p>Use IPE270, S235 and span-to-depth 6. Compare C00 (diameter/depth 30%, distance/depth 60%) with C100 (full section).</p>
@@ -23,11 +21,10 @@
       <li><a href="database-guis/energy-dissipation/"><strong>Cumulative Energy Dissipation</strong></a>. Choose the matching batch. Click <strong>Clear all</strong>, select C00 and C100, then <strong>Plot selected</strong>. Switch to normalised energy for a relative comparison.</li>
       <li><a href="chapter-6-ml-backbone-gui/"><strong>FE and ML Backbone Prediction</strong></a>. Select C00 in FE mode, then switch to <strong>ML prediction mode</strong>. Try a geometry between FE settings to obtain a predicted backbone.</li>
     </ol>
-    <p>Include case IDs and input settings with exported plots.</p>
   </section>
   <section id="coverage" aria-labelledby="coverage-title">
     <h2 id="coverage-title">Dataset coverage</h2>
-    <p>The finite element (FE) dataset contains 7,500 circular-opening cases and 75 full-section references. Export date: 17 February 2026.</p>
+    <p>The finite element (FE) dataset contains 7,500 circular-opening cases and 75 full-section references.</p>
     <div class="table-scroll" role="region" aria-label="Dataset coverage table" tabindex="0"><table>
       <thead><tr><th scope="col">Variable</th><th scope="col">Stored FE settings</th><th scope="col">Machine-learning (ML) settings</th></tr></thead><tbody>
       <tr><th scope="row">IPE profile</th><td>IPE270, IPE330, IPE400, IPE500, IPE600</td><td>The same five profiles</td></tr>
@@ -44,28 +41,27 @@
     <h2 id="tools-title">How the tools work</h2>
     <div class="method-tool-grid">
       <article><h3 id="explorer">FE explorer</h3><p>Displays stored backbones and von Mises/equivalent plastic strain (PEEQ) contours. Plots export as SVG; the browser does not run Abaqus.</p></article>
-      <article><h3 id="radar">Radar ranking</h3><p>Uses six response indicators with fixed global normalisation. Outward denotes the selected favourable direction. Polygon-area rankings depend on scales and spoke order; they do not establish a structural optimum.</p><p>CSV exports every filtered case, not just Top N, and requires the existing download password.</p></article>
+      <article><h3 id="radar">Radar ranking</h3><p>Uses six response indicators with fixed global normalisation. Outward denotes the selected favourable direction. Polygon-area rankings depend on scales and spoke order.</p></article>
       <article><h3 id="energy">Cumulative energy</h3><p>Plots saved cumulative energy in kJ or normalised by the full-section value at each cycle. Compare cases with the same loading sequence.</p></article>
       <article><h3 id="prediction">ML prediction</h3><p>Runs 400 exported XGBoost trees in the browser. Nine features yield 21 normalised moment ordinates, scaled by section plastic moment. The database benchmark compares predictions with stored FE backbones.</p></article>
     </div>
   </section>
   <section id="sources" aria-labelledby="sources-title">
-    <h2 id="sources-title">Publications and reuse</h2>
+    <h2 id="sources-title">Publications</h2>
     <p>Research and software: Meysam Bayat, City St George’s, University of London. Supervisor: Professor Konstantinos Daniel Tsavdaridis.</p>
     <h3>Published papers</h3>
     <ul class="source-list">
-      <li><a href="https://doi.org/10.1002/cepa.70779">FE parametric study of circular Reduced Web Section (RWS) connections subjected to cyclic loading</a> — <cite>ce/papers</cite> 9(2–3), 1835–1840 (2026).</li>
-      <li><a href="https://doi.org/10.1002/cepa.70780">Reducing column-face demands in circular Reduced Web Section (RWS) connections</a> — <cite>ce/papers</cite> 9(2–3), 1885–1890 (2026).</li>
-      <li><a href="https://doi.org/10.3389/fbuil.2025.1592665">A case study for optimising the geometry and moment capacity of code compliant welded RWS connections</a> — <cite>Frontiers in Built Environment</cite>.</li>
-      <li><a href="https://doi.org/10.1002/cepa.70170">Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading</a> — <cite>ce/papers</cite>.</li>
-      <li><a href="https://openaccess.city.ac.uk/id/eprint/35039/">Cyclic performance of reduced web section (RWS) beam connections</a> — conference paper, <cite>The 2nd International Symposium on Advanced Materials and Design for Structural Safety and Sustainability</cite>, Lyon, 6–7 February 2025.</li>
+      <li><a href="https://doi.org/10.1002/cepa.70779">FE parametric study of circular Reduced Web Section (RWS) connections subjected to cyclic loading</a> (2026).</li>
+      <li><a href="https://doi.org/10.1002/cepa.70780">Reducing column-face demands in circular Reduced Web Section (RWS) connections</a> (2026).</li>
+      <li><a href="https://doi.org/10.3389/fbuil.2025.1592665">A case study for optimising the geometry and moment capacity of code compliant welded RWS connections</a> (2025).</li>
+      <li><a href="https://doi.org/10.1002/cepa.70170">Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading</a> (2025).</li>
+      <li><a href="https://openaccess.city.ac.uk/id/eprint/35039/">Cyclic performance of reduced web section (RWS) beam connections</a> (2025).</li>
     </ul>
     <h3>Preprint and supplementary material</h3>
     <ul class="source-list">
       <li><a href="https://doi.org/10.21203/rs.3.rs-8506924/v1">A Comparative Study of Data-Driven Analysis of Reduced Web Section (RWS) Connections</a> — Research Square preprint.</li>
       <li><a href="https://doi.org/10.25383/city.31537849">Curve-family response plots and screening maps for a database of 7,575 RWS finite element models</a> — supplementary figure compendium on City Figshare.</li>
     </ul>
-    <p>Cite the relevant paper, tool and repository revision. No repository-wide licence is provided. The figure compendium has its own licence; third-party libraries and logos retain their respective terms and ownership.</p>
     <p><a class="text-link" href="./#tools">Return to the four research tools <span aria-hidden="true">→</span></a></p>
   </section>
 </main>
