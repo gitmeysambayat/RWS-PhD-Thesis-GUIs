@@ -15,14 +15,14 @@
 <main class="wrap document" id="main">
   <p class="eyebrow">A guide to the demonstrations</p><h1>Methods and use</h1>
   <p class="intro">Use these tools to inspect the circular reduced web section (RWS) study, compare finite element (FE) response and examine machine-learning (ML) predictions. This guide explains what the browser does and how to interpret its outputs.</p>
-  <nav class="contents" aria-label="On this page"><a href="#walkthrough">Walkthrough</a><a href="#coverage">Dataset</a><a href="#tools">How the tools work</a><a href="#interpretation">Interpretation</a><a href="#local">Local use</a><a href="#sources">Sources &amp; reuse</a></nav>
+  <nav class="contents" aria-label="On this page"><a href="#walkthrough">Walkthrough</a><a href="#coverage">Dataset</a><a href="#tools">How the tools work</a><a href="#interpretation">Interpretation</a><a href="#sources">Sources &amp; reuse</a></nav>
   <section id="walkthrough" aria-labelledby="walkthrough-title">
     <h2 id="walkthrough-title">Start with one controlled comparison</h2>
     <ol class="walkthrough">
-      <li><strong>Choose a reference case.</strong> Open the <a href="database-guis/rws-explorer/">FE explorer</a> with IPE270, S235 and the span-to-depth setting 6. Select <strong>C00</strong>: opening diameter/depth 30% and opening distance/depth 60%. Its case ID is <code>6.270.S235.C00</code>.</li>
-      <li><strong>Compare with the full section.</strong> While C00 is selected, click <strong>Add curve</strong> to retain it, then use <strong>Select C100 (Full section)</strong> to compare the no-opening reference. Read the moment–rotation curve and column-face indicators together; a change in one response measure does not describe the whole connection.</li>
-      <li><strong>Examine the wider response.</strong> In the <a href="database-guis/energy-dissipation/">energy viewer</a>, select the matching IPE270/S235/span-setting-6 batch, click <strong>Clear all</strong>, select C00, then click <strong>Plot selected</strong>. Include C100 when comparing the absolute curves with the full-section baseline. Use the <a href="database-guis/dynamic-radar-plot/">radar comparison</a> to examine several response measures on fixed scales.</li>
-      <li><strong>Inspect a surrogate prediction.</strong> Open the <a href="chapter-6-ml-backbone-gui/">FE–ML comparison</a> and inspect C00 in FE mode. Switch to ML prediction mode and vary an input between database settings. A prediction is available, but an exact FE overlay appears only at a matching database point.</li>
+      <li><a href="database-guis/rws-explorer/"><strong>Reduced Web Section Explorer</strong></a>. Choose IPE270, S235 and the span-to-depth setting 6, then select <strong>C00</strong>: opening diameter/depth 30% and opening distance/depth 60%. Click <strong>Add curve</strong> to retain it, then <strong>Select C100 (Full section)</strong> to compare with the no-opening reference. Read the backbone curve and column-face indicators together.</li>
+      <li><a href="database-guis/dynamic-radar-plot/"><strong>Dynamic Radar Plot</strong></a>. Filter to the same profile, grade and span-to-depth setting, then adjust the response ranges and <strong>Top N</strong>. Compare trade-offs in energy, moment retention, degradation and column-face response. The ranking helps shortlist existing configurations for an optimisation study.</li>
+      <li><a href="database-guis/energy-dissipation/"><strong>Cumulative Energy Dissipation</strong></a>. Select the IPE270/S235/span-setting-6 batch, click <strong>Clear all</strong>, select C00, then click <strong>Plot selected</strong>. Include C100 when comparing the absolute curves with the full-section baseline, or examine the normalised cumulative-energy response.</li>
+      <li><a href="chapter-6-ml-backbone-gui/"><strong>FE and ML Backbone Prediction</strong></a>. Inspect C00 in FE mode, then switch to <strong>ML prediction mode</strong> and vary an input between database settings. Compare the predicted response with FE data at matching database points; an exact FE overlay appears only at those points.</li>
     </ol>
     <p>Keep the case ID and settings with any exported plot. This makes a comparison traceable to its stored reference rather than just a screenshot.</p>
   </section>
@@ -40,14 +40,13 @@
       <tr><th scope="row">Cases per profile/grade/span setting</th><td>C00–C99: 100 opening arrangements; C100: full section</td></tr>
       <tr><th scope="row">Backbone ordinates</th><td>21 rotation levels from −0.06 to +0.06 rad; moment in kN·m</td></tr>
       </tbody></table></div>
-    <p><strong>Coverage is not the same as completeness.</strong> There are 7,574 complete stored backbone curves. Case <code>6.500.S235.C00</code> has eight missing ordinates at ±0.03 to ±0.06 rad, and its energy record has 26 cycles rather than 34. The original records are retained; unavailable response must not be treated as a completed loading sequence.</p>
   </section>
   <section id="tools" aria-labelledby="tools-title">
     <h2 id="tools-title">What each tool does</h2>
     <h3 id="explorer">FE explorer: select and compare stored results</h3>
     <p>The controls select exact rows in an embedded dataset. JavaScript renders the backbone curves and loads case-labelled von Mises and equivalent plastic strain (PEEQ) contour images. Add curves to compare cases or export the plot as SVG. The browser does not launch an Abaqus analysis.</p>
-    <h3 id="radar">Radar comparison: screen several response measures</h3>
-    <p>The radar tool filters stored summaries, normalises them using fixed global ranges and ranks the filtered cases by polygon area. Its six spokes represent column-face PEEQ and von Mises indicators, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section.</p>
+    <h3 id="radar">Radar comparison: screening to support optimisation</h3>
+    <p>The radar tool supports optimisation studies by filtering existing configurations against chosen response ranges and ranking the remaining candidates by polygon area. It normalises the stored summaries using fixed global ranges, making trade-offs visible across the selected response measures. Its six spokes represent column-face PEEQ and von Mises indicators, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section.</p>
     <p>The selected favourable direction is shown outward. A large polygon depends on those directions, scales and spoke order; it does not establish an optimum or design qualification. The CSV command exports all cases passing the filters, not only the displayed Top N, and retains the original download-password prompt.</p>
     <h3 id="energy">Energy viewer: compare saved cyclic-response histories</h3>
     <p>The viewer plots saved cumulative-energy arrays for selected cases and their full-section references. It offers the stored absolute scale (labelled kJ) and per-cycle normalisation by the corresponding full-section history. It does not integrate raw hysteresis signals in the browser. Comparisons should use compatible loading sequences.</p>
@@ -60,21 +59,21 @@
     <p>The tools support research exploration of this circular-RWS study. Moment-retention and rotation thresholds are individual screening measures, not evidence of formal connection prequalification or a substitute for the applicable modelling and design checks. FE agreement is distinct from experimental validation.</p>
     <details><summary>Span notation and material inputs</summary><p>The interface uses a span-to-depth control labelled <code>L/h</code>; the exported model names that feature <code>2L/h</code>. The browser passes the stored value unchanged. The original half-span/full-span definition needs to be checked against the research methodology before mapping an external geometry to this input. The model uses nominal grade strength as a feature; the FE export also contains stored material-strength values, which need not equal the nominal grade.</p></details>
     <details><summary>Field quantities and absolute energy scales</summary><p>Some exported field quantities are stored summary indicators, and their raw scale or aggregation is not fully documented here. Use their stated normalisations for comparative interpretation; do not assume a raw indicator is a pointwise stress or strain without checking the extraction definition. The radar’s absolute energy summary and the energy viewer’s absolute histories are not reconciled by the repository documentation. Their matching normalised trends do not establish a common absolute scale.</p></details>
-    <details><summary>Incomplete response and prediction comparisons</summary><p>For the incomplete case <code>6.500.S235.C00</code>, legacy summary fields exist at rotations where the backbone values are missing. These fields do not establish an available FE response. The Explorer and ML interface mark the affected comparisons unavailable rather than treating those summaries as completed results. Energy curves retain their shorter recorded sequence. The radar tool excludes this case from ranking and filtered CSV export while retaining its original record and the fixed normalisation ranges. Treat any separately accessed legacy summary for this case accordingly.</p></details>
     <details><summary>Benchmark metrics and model scope</summary><p>Database-wide error measures describe the supplied records and model export. They do not establish held-out accuracy, training independence or performance beyond the studied domain. When an ultimate-rotation value is shown as a lower bound because a 20% strength drop was not reached within the available curve, read it as a finite-window result; an aggregate rotation error can include such censored values. The repository packages the deployed model and outputs, not the full FE-generation, training or experimental-validation workflow.</p></details>
-  </section>
-  <section id="local" aria-labelledby="local-title">
-    <h2 id="local-title">Run the tools locally</h2>
-    <p>Download or clone the <a href="https://github.com/gitmeysambayat/RWS-PhD-Thesis-GUIs">repository</a>, keep its directory structure, and run this from the repository root with Python 3 installed:</p>
-    <pre><code>python3 -m http.server 8000 --bind 127.0.0.1</code></pre>
-    <p>Open <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>. No build step is needed. The local server lets the ML page load its model file; opening HTML directly can block that request. The radar and energy tools load plotting libraries from public CDNs and need internet access. Contour images account for most of the repository download.</p>
   </section>
   <section id="sources" aria-labelledby="sources-title">
     <h2 id="sources-title">Research sources, credit and reuse</h2>
     <p>Research and software development: Meysam Bayat, City St George’s, University of London, under the supervision of Professor Konstantinos Daniel Tsavdaridis. See each research output for its full co-authorship and scientific methods.</p>
+    <h3>Published papers</h3>
     <ul class="source-list">
+      <li><a href="https://doi.org/10.1002/cepa.70779">FE parametric study of circular Reduced Web Section (RWS) connections subjected to cyclic loading</a> — <cite>ce/papers</cite> 9(2–3), 1835–1840 (2026).</li>
+      <li><a href="https://doi.org/10.1002/cepa.70780">Reducing column-face demands in circular Reduced Web Section (RWS) connections</a> — <cite>ce/papers</cite> 9(2–3), 1885–1890 (2026).</li>
       <li><a href="https://doi.org/10.3389/fbuil.2025.1592665">A case study for optimising the geometry and moment capacity of code compliant welded RWS connections</a> — <cite>Frontiers in Built Environment</cite>.</li>
       <li><a href="https://doi.org/10.1002/cepa.70170">Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading</a> — <cite>ce/papers</cite>.</li>
+      <li><a href="https://openaccess.city.ac.uk/id/eprint/35039/">Cyclic performance of reduced web section (RWS) beam connections</a> — conference paper, <cite>The 2nd International Symposium on Advanced Materials and Design for Structural Safety and Sustainability</cite>, Lyon, 6–7 February 2025.</li>
+    </ul>
+    <h3>Preprint and supplementary material</h3>
+    <ul class="source-list">
       <li><a href="https://doi.org/10.21203/rs.3.rs-8506924/v1">A Comparative Study of Data-Driven Analysis of Reduced Web Section (RWS) Connections</a> — Research Square preprint.</li>
       <li><a href="https://doi.org/10.25383/city.31537849">Curve-family response plots and screening maps for a database of 7,575 RWS finite element models</a> — supplementary figure compendium on City Figshare.</li>
     </ul>

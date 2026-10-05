@@ -1,6 +1,6 @@
 # RWS dynamic radar comparison
 
-Filter saved finite element (FE) results and compare six response indicators for circular Reduced Web Section (RWS) connections. Fixed global ranges keep the radar scales consistent when the selection changes.
+Support optimisation studies by filtering saved finite element (FE) results, comparing six response indicators and shortlisting existing circular Reduced Web Section (RWS) configurations. Fixed global ranges keep the radar scales consistent when the selection changes.
 
 **[Open the radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/)** · [Methods and limitations](../../methods.html) · [All tools](../../README.md)
 
