@@ -19,7 +19,7 @@
   <section id="walkthrough" aria-labelledby="walkthrough-title">
     <h2 id="walkthrough-title">Start with one controlled comparison</h2>
     <ol class="walkthrough">
-      <li><a href="database-guis/rws-explorer/"><strong>Reduced Web Section Explorer</strong></a>. Choose IPE270, S235 and the span-to-depth setting 6, then select <strong>C00</strong>: opening diameter/depth 30% and opening distance/depth 60%. Click <strong>Add curve</strong> to retain it, then <strong>Select C100 (Full section)</strong> to compare with the no-opening reference. Read the backbone curve and column-face indicators together.</li>
+      <li><a href="database-guis/rws-explorer/"><strong>Reduced Web Section Beams Explorer</strong></a>. Choose IPE270, S235 and the span-to-depth setting 6, then select <strong>C00</strong>: opening diameter/depth 30% and opening distance/depth 60%. Click <strong>Add curve</strong> to retain it, then <strong>Select C100 (Full section)</strong> to compare with the no-opening reference. Read the backbone curve and column-face indicators together.</li>
       <li><a href="database-guis/dynamic-radar-plot/"><strong>Dynamic Radar Plot</strong></a>. Filter to the same profile, grade and span-to-depth setting, then adjust the response ranges and <strong>Top N</strong>. Compare trade-offs in energy, moment retention, degradation and column-face response. The ranking helps shortlist existing configurations for an optimisation study.</li>
       <li><a href="database-guis/energy-dissipation/"><strong>Cumulative Energy Dissipation</strong></a>. Select the IPE270/S235/span-setting-6 batch, click <strong>Clear all</strong>, select C00, then click <strong>Plot selected</strong>. Include C100 when comparing the absolute curves with the full-section baseline, or examine the normalised cumulative-energy response.</li>
       <li><a href="chapter-6-ml-backbone-gui/"><strong>FE and ML Backbone Prediction</strong></a>. Inspect C00 in FE mode, then switch to <strong>ML prediction mode</strong> and vary an input between database settings. Compare the predicted response with FE data at matching database points; an exact FE overlay appears only at those points.</li>
@@ -30,29 +30,40 @@
     <h2 id="coverage-title">Dataset coverage</h2>
     <p>The Explorer and ML interface share 7,575 stored FE-derived records: 7,500 circular-opening cases and 75 full-section references. The embedded export is dated 17 February 2026.</p>
     <div class="table-scroll" role="region" aria-label="Dataset coverage table" tabindex="0"><table>
-      <caption>Discrete settings in the shared FE dataset. The ML controls also permit intermediate geometry inputs within their stated range.</caption>
-      <thead><tr><th scope="col">Variable</th><th scope="col">Available settings</th></tr></thead><tbody>
-      <tr><th scope="row">IPE profile</th><td>IPE270, IPE330, IPE400, IPE500, IPE600</td></tr>
-      <tr><th scope="row">Steel grade</th><td>S235, S275, S355</td></tr>
-      <tr><th scope="row">Span-to-depth control</th><td>6, 7, 9, 12, 14; see the notation note below</td></tr>
-      <tr><th scope="row">Opening diameter / depth</th><td>30–75%, in steps of 5 percentage points</td></tr>
-      <tr><th scope="row">Opening distance / depth</th><td>60–240%, in steps of 20 percentage points</td></tr>
-      <tr><th scope="row">Cases per profile/grade/span setting</th><td>C00–C99: 100 opening arrangements; C100: full section</td></tr>
-      <tr><th scope="row">Backbone ordinates</th><td>21 rotation levels from −0.06 to +0.06 rad; moment in kN·m</td></tr>
+      <caption>ML ranges describe the selectable inputs, including intermediate geometry settings. Exact FE overlays require a matching stored case; see the span-notation note below.</caption>
+      <thead><tr><th scope="col">Variable</th><th scope="col">Stored FE settings</th><th scope="col">ML prediction settings</th></tr></thead><tbody>
+      <tr><th scope="row">IPE profile</th><td>IPE270, IPE330, IPE400, IPE500, IPE600</td><td>The same five profiles</td></tr>
+      <tr><th scope="row">Steel grade</th><td>S235, S275, S355</td><td>The same three grades</td></tr>
+      <tr><th scope="row">Span-to-depth control</th><td>6, 7, 9, 12, 14</td><td>6–14, in steps of 0.1</td></tr>
+      <tr><th scope="row">Opening diameter / depth</th><td>30–75%, in steps of 5 percentage points</td><td>30–75%, in steps of 0.5 percentage points</td></tr>
+      <tr><th scope="row">Opening distance / depth</th><td>60–240%, in steps of 20 percentage points</td><td>60–240%, in steps of 1 percentage point</td></tr>
+      <tr><th scope="row">Full section</th><td>C100: opening diameter and distance both 0</td><td>Set diameter to 0; distance becomes 0 and its control is disabled</td></tr>
+      <tr><th scope="row">Case selection and FE comparison</th><td>C00–C99: 100 opening arrangements, plus C100 per profile/grade/span setting</td><td>Finer geometry combinations; an exact FE overlay is available only at stored FE settings</td></tr>
+      <tr><th scope="row">Backbone ordinates</th><td colspan="2">21 rotation levels from −0.06 to +0.06 rad; moment in kN·m</td></tr>
       </tbody></table></div>
   </section>
   <section id="tools" aria-labelledby="tools-title">
     <h2 id="tools-title">What each tool does</h2>
+    <div class="method-tool-grid">
+    <article>
     <h3 id="explorer">FE explorer: select and compare stored results</h3>
     <p>The controls select exact rows in an embedded dataset. JavaScript renders the backbone curves and loads case-labelled von Mises and equivalent plastic strain (PEEQ) contour images. Add curves to compare cases or export the plot as SVG. The browser does not launch an Abaqus analysis.</p>
+    </article>
+    <article>
     <h3 id="radar">Radar comparison: screening to support optimisation</h3>
     <p>The radar tool supports optimisation studies by filtering existing configurations against chosen response ranges and ranking the remaining candidates by polygon area. It normalises the stored summaries using fixed global ranges, making trade-offs visible across the selected response measures. Its six spokes represent column-face PEEQ and von Mises indicators, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section.</p>
     <p>The selected favourable direction is shown outward. A large polygon depends on those directions, scales and spoke order; it does not establish an optimum or design qualification. The CSV command exports all cases passing the filters, not only the displayed Top N, and retains the original download-password prompt.</p>
+    </article>
+    <article>
     <h3 id="energy">Energy viewer: compare saved cyclic-response histories</h3>
     <p>The viewer plots saved cumulative-energy arrays for selected cases and their full-section references. It offers the stored absolute scale (labelled kJ) and per-cycle normalisation by the corresponding full-section history. It does not integrate raw hysteresis signals in the browser. Comparisons should use compatible loading sequences.</p>
+    </article>
+    <article>
     <h3 id="prediction">FE–ML comparison: run the exported model</h3>
     <p>The page loads the supplied <code>xgb_model.json</code> and evaluates its 400 trees in JavaScript. Nine input features produce 21 normalised moment ordinates, which are scaled by section plastic moment to form a predicted backbone. This is browser-side inference, including for intermediate inputs within the controls.</p>
     <p>At an exact database point, the interface can overlay the stored FE curve and associated contours. Between those points, an ML prediction does not create a new FE result. A full-database benchmark measures agreement with the embedded references; the repository does not include the training pipeline or split information needed to identify an independent test set.</p>
+    </article>
+    </div>
   </section>
   <section id="interpretation" aria-labelledby="interpretation-title">
     <h2 id="interpretation-title">Interpreting the outputs</h2>

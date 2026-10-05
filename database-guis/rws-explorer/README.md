@@ -1,4 +1,4 @@
-# Reduced Web Section Explorer
+# Reduced Web Section Beams Explorer
 
 Inspect saved finite element (FE) results for circular Reduced Web Section (RWS) connections. The interface links a case's geometry to its moment–rotation backbone, characteristic response measures and available contour images.
 

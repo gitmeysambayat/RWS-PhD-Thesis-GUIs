@@ -10,7 +10,7 @@ The tools connect a finite element (FE) database to visual comparison, response 
 
 | Tool | What you can do | Implementation and instructions |
 | --- | --- | --- |
-| [Reduced Web Section Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/) | Select FE cases, overlay moment–rotation backbones, inspect response measures and contour images, and export plots. | [Embedded FE data and JavaScript/SVG interface](database-guis/rws-explorer/) |
+| [Reduced Web Section Beams Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/) | Select FE cases, overlay moment–rotation backbones, inspect response measures and contour images, and export plots. | [Embedded FE data and JavaScript/SVG interface](database-guis/rws-explorer/) |
 | [Dynamic radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/) | Filter and rank cases using six response indicators to shortlist candidates for optimisation studies. | [Embedded FE summaries, Plotly and noUiSlider](database-guis/dynamic-radar-plot/) |
 | [Cumulative energy comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/) | Compare saved cumulative energy curves across cases and batches, in kJ or relative to a solid-beam baseline. | [Embedded response data and Plotly](database-guis/energy-dissipation/) |
 | [FE and ML backbone comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-6-ml-backbone-gui/) | Run browser-side predictions, overlay exact FE cases where available, and inspect prediction differences. | [JavaScript inference and exported XGBoost tree model](chapter-6-ml-backbone-gui/) |
