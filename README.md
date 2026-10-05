@@ -1,33 +1,31 @@
 # RWS research tools
 
-Browser tools for exploring how circular web openings affect the response of steel beam-to-column connections under cyclic loading. Developed by **Meysam Bayat** for the PhD thesis *Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames*.
-
-The tools connect a finite element (FE) database to visual comparison, response screening and machine-learning (ML) backbone prediction. They make individual cases, comparison criteria and model outputs inspectable without running an FE solver.
+Four browser tools by **Meysam Bayat** for comparing finite element (FE) results and machine-learning (ML) backbone predictions for steel connections with circular web openings. Companion to the PhD thesis *Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames*.
 
 **[Open the demonstrations](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/)** · **[Methods and use](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/methods.html)**
 
-## Explore the work
+## Tools
 
 | Tool | What you can do | Implementation and instructions |
 | --- | --- | --- |
-| [Reduced Web Section Beams Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/) | Select FE cases, overlay moment–rotation backbones, inspect response measures and contour images, and export plots. | [Embedded FE data and JavaScript/SVG interface](database-guis/rws-explorer/) |
-| [Dynamic radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/) | Filter and rank cases using six response indicators to shortlist candidates for optimisation studies. | [Embedded FE summaries, Plotly and noUiSlider](database-guis/dynamic-radar-plot/) |
-| [Cumulative energy comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/) | Compare saved cumulative energy curves across cases and batches, in kJ or relative to a solid-beam baseline. | [Embedded response data and Plotly](database-guis/energy-dissipation/) |
-| [FE and ML backbone comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-6-ml-backbone-gui/) | Run browser-side predictions, overlay exact FE cases where available, and inspect prediction differences. | [JavaScript inference and exported XGBoost tree model](chapter-6-ml-backbone-gui/) |
+| [Reduced Web Section Beams Explorer](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/rws-explorer/) | Overlay FE backbones, inspect contours and export plots. | [FE data and JavaScript/SVG](database-guis/rws-explorer/) |
+| [Dynamic radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/) | Filter and rank cases by six indicators for optimisation studies. | [FE summaries, Plotly and noUiSlider](database-guis/dynamic-radar-plot/) |
+| [Cumulative energy comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/) | Compare cumulative energy in kJ or relative to a solid-beam reference. | [Energy data and Plotly](database-guis/energy-dissipation/) |
+| [FE and ML backbone comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/chapter-6-ml-backbone-gui/) | Run predictions and compare them with matching FE cases. | [JavaScript inference and XGBoost export](chapter-6-ml-backbone-gui/) |
 
-For a first comparison, open the Explorer, select a profile, grade and span-to-depth setting, and choose **C00**. Press **Add curve** to retain it, then select **C100**, the full-section reference. The first curve follows the controls while the added curve stays on the plot. Use the same case identifiers in the other tools to examine energy or ML agreement.
+To compare an opening with the full section, select **C00** in the Explorer, press **Add curve**, then select **C100**. The first curve follows the controls; added curves stay on the plot. Use matching case IDs across tools.
 
 ## Data and scope
 
-The Explorer and ML interface share an embedded **7,575-case FE dataset**: five IPE profiles, three steel grades, five span-to-depth settings and 101 cases per combination. Its export metadata is dated 17 February 2026. Moments are reported in kN·m and rotations in rad. One case has incomplete backbone and energy records; its available response must not be treated as a complete loading sequence.
+The Explorer and ML interface share **7,575 stored FE cases**: five IPE profiles × three grades × five span-to-depth settings × 101 cases. Export date: 17 February 2026. Moments: kN·m; rotations: rad. Case `6.500.S235.C00` has incomplete backbone and energy records and is excluded from radar ranking and export.
 
-The three database tools display saved analysis results. The ML tool additionally evaluates the bundled tree ensemble in the browser for inputs within its controls. Exact FE comparisons are available only at database design points. A dataset-wide comparison is not an independent test-set validation.
+The database tools display saved results. The ML tool computes predictions within its input bounds; exact FE comparisons require a matching database point. Its dataset-wide benchmark is not an independent test-set validation.
 
-These are research tools for examining this circular-RWS study. Radar area is a comparison score, and displayed strength thresholds are individual checks; neither establishes an optimum or connection qualification. See [methods and limitations](methods.html) for input conventions, exported-field provenance and interpretation boundaries.
+Radar area and displayed thresholds are screening measures, not proof of an optimum or connection qualification. See [methods and limitations](methods.html) for input conventions and field scaling.
 
 ## Repository and research sources
 
-`index.html` is the landing page; `methods.html` documents use and interpretation. Each tool directory contains its HTML/JavaScript application, embedded data, instructions and an interface screenshot. The Explorer and ML directories also contain `contours/`. This repository distributes the browser demonstrations and exported data/model assets; it does not contain the FE-generation or ML-training pipeline.
+Each tool directory contains its application and data; Explorer and ML also include contour images. The repository includes the deployed model, but not the FE-generation or ML-training pipeline.
 
 Published papers:
 
@@ -41,10 +39,10 @@ Preprint:
 
 - [A Comparative Study of Data-Driven Analysis of Reduced Web Section (RWS) Connections](https://doi.org/10.21203/rs.3.rs-8506924/v1), Research Square **preprint**.
 
-When using the research, cite the relevant publication and identify the tool and repository revision used. The publications provide research context; the repository contents define this software release.
+Cite the relevant publication, tool and repository revision used.
 
 ## Credits and reuse
 
-Research software: Meysam Bayat. See the linked publications for research co-authorship. The radar and energy interfaces use [Plotly.js](https://plotly.com/javascript/); the radar controls also use [noUiSlider](https://refreshless.com/nouislider/). Institutional and research-group logos retain their respective ownership.
+See the publications for research co-authorship. Radar and energy use [Plotly.js](https://plotly.com/javascript/); radar also uses [noUiSlider](https://refreshless.com/nouislider/).
 
-No repository-wide licence is currently provided. Public availability does not grant a general reuse licence; clarify permission with the author before redistributing code, data or images. Third-party components retain their own licences.
+No repository-wide licence is provided. Obtain the author's permission before redistributing code, data or images. Third-party components and logos retain their respective licences or ownership.

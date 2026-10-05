@@ -16,54 +16,41 @@
   </div></header>
   <main id="main">
     <section class="hero wrap" aria-labelledby="page-title">
-      <div class="hero-top"><p class="eyebrow">Complementary tools for my PhD research</p><div class="logos" aria-label="University and research group">
+      <div class="hero-top"><p class="eyebrow">PhD research software</p><div class="logos" aria-label="University and research group">
         <img src="database-guis/rws-explorer/3DMBC_logo.png" alt="3DMBC research group" width="162" height="62">
         <img src="database-guis/rws-explorer/city-st-georges-responsive-logo.svg" alt="City St George’s, University of London" width="118" height="62">
       </div></div>
       <h1 id="page-title">Interactive tools for RWS steel connections</h1>
-      <p class="lead">Explore how circular web openings affect steel moment connections, from finite element results to machine-learning predictions.</p>
-      <p class="hero-detail">Developed by Meysam Bayat at City St George’s, University of London, these four browser tools connect a parametric numerical study with practical ways to examine, compare and communicate structural response.</p>
-      <div class="actions"><a class="button" href="database-guis/rws-explorer/">Start with the FE explorer <span aria-hidden="true">→</span></a><a class="text-link" href="methods.html#walkthrough">Follow a worked walkthrough</a></div>
+      <p class="lead">Compare finite element (FE) results and machine-learning (ML) predictions for reduced web section (RWS) steel connections with circular openings.</p>
       <dl class="facts" aria-label="Study and tool coverage">
-        <div><dt>7,575</dt><dd>finite element cases</dd></div><div><dt>5 × 3</dt><dd>IPE profiles × steel grades</dd></div><div><dt>4 tools</dt><dd>open in your browser</dd></div><div><dt>XGBoost</dt><dd>browser-side prediction</dd></div>
+        <div><dt>7,575</dt><dd>FE cases</dd></div><div><dt>5</dt><dd>IPE profiles</dd></div><div><dt>3</dt><dd>steel grades</dd></div>
       </dl>
     </section>
-    <section class="tools-section" id="tools" aria-labelledby="tools-title"><div class="wrap">
-      <div class="section-heading"><div><p class="eyebrow">Explore the research</p><h2 id="tools-title">Choose an engineering question</h2></div><p>Each tool offers a different view of the same RWS study.</p></div>
+    <section class="tools-section" id="tools" aria-label="Research tools"><div class="wrap">
       <div class="tool-grid">
         <article class="tool-card">
           <a class="preview" href="database-guis/rws-explorer/" tabindex="-1" aria-hidden="true"><img src="screenshots/20261005_RWSExplorer.png" alt="" width="1600" height="1000" loading="lazy"></a>
-          <div class="card-content"><p class="eyebrow">01 / Numerical modelling &amp; data exploration</p><h3>Reduced Web Section Beams Explorer</h3><p class="question">How does the connection respond as its geometry changes?</p><p>Select a profile, steel grade and opening geometry. Compare stored moment–rotation backbone curves, column-face demand and finite element contour images.</p><p class="tool-note">Saved FE results · 7,500 RWS cases + 75 full-section references</p><div class="card-actions"><a class="button" href="database-guis/rws-explorer/">Open FE explorer</a><a href="methods.html#explorer">Usage &amp; scope</a></div></div>
+          <div class="card-content"><h2>Reduced Web Section Beams Explorer</h2><p>Compare moment–rotation backbones, column-face response and stress/strain contours for selected FE cases.</p><div class="card-actions"><a class="button" href="database-guis/rws-explorer/">Open FE explorer</a><a href="methods.html#explorer">Usage &amp; scope</a></div></div>
         </article>
         <article class="tool-card">
           <a class="preview" href="database-guis/dynamic-radar-plot/" tabindex="-1" aria-hidden="true"><img src="screenshots/20261005_RadarPlot.png" alt="" width="1600" height="1000" loading="lazy"></a>
-          <div class="card-content"><p class="eyebrow">02 / Comparison &amp; optimisation support</p><h3>Dynamic Radar Plot</h3><p class="question">Which configurations offer useful performance trade-offs?</p><p>Filter and rank existing configurations to support optimisation studies. Compare trade-offs in moment retention, cumulative energy, strength degradation and column-face response on a common radar plot.</p><p class="tool-note">Database screening · Interpret the metric directions before ranking</p><div class="card-actions"><a class="button" href="database-guis/dynamic-radar-plot/">Open radar comparison</a><a href="methods.html#radar">Usage &amp; scope</a></div></div>
+          <div class="card-content"><h2>Dynamic Radar Plot</h2><p>Filter and rank configurations by energy, moment retention, degradation and column-face response to shortlist candidates for optimisation studies.</p><div class="card-actions"><a class="button" href="database-guis/dynamic-radar-plot/">Open radar comparison</a><a href="methods.html#radar">Usage &amp; scope</a></div></div>
         </article>
         <article class="tool-card">
           <a class="preview" href="database-guis/energy-dissipation/" tabindex="-1" aria-hidden="true"><img src="screenshots/20261005_EnergyDissipation.png" alt="" width="1600" height="1000" loading="lazy"></a>
-          <div class="card-content"><p class="eyebrow">03 / Cyclic-response interpretation</p><h3>Cumulative Energy Dissipation</h3><p class="question">How does accumulated energy vary across a batch?</p><p>Review cumulative energy trends for connection families and compare opening configurations with the corresponding full-section reference.</p><p class="tool-note">Saved energy data · Read alongside the study’s loading protocol</p><div class="card-actions"><a class="button" href="database-guis/energy-dissipation/">Open energy viewer</a><a href="methods.html#energy">Usage &amp; scope</a></div></div>
+          <div class="card-content"><h2>Cumulative Energy Dissipation</h2><p>Compare cumulative energy histories across opening configurations and their full-section references.</p><div class="card-actions"><a class="button" href="database-guis/energy-dissipation/">Open energy viewer</a><a href="methods.html#energy">Usage &amp; scope</a></div></div>
         </article>
         <article class="tool-card">
           <a class="preview" href="chapter-6-ml-backbone-gui/" tabindex="-1" aria-hidden="true"><img src="screenshots/20261005_FEMLBackbone.png" alt="" width="1600" height="1000" loading="lazy"></a>
-          <div class="card-content"><p class="eyebrow">04 / Machine learning &amp; engineering software</p><h3>FE and ML Backbone Prediction</h3><p class="question">How closely does the surrogate reproduce an FE backbone?</p><p>Run the exported XGBoost model in your browser, change inputs within the interface’s range and compare predictions with FE results at matching database points.</p><p class="tool-note">Live model inference · Exact FE comparisons at discrete design points</p><div class="card-actions"><a class="button" href="chapter-6-ml-backbone-gui/">Open FE–ML comparison</a><a href="methods.html#prediction">Usage &amp; scope</a></div></div>
+          <div class="card-content"><h2>FE and ML Backbone Prediction</h2><p>Predict moment–rotation backbones with XGBoost. Use finer geometry inputs and overlay matching FE cases.</p><div class="card-actions"><a class="button" href="chapter-6-ml-backbone-gui/">Open FE–ML comparison</a><a href="methods.html#prediction">Usage &amp; scope</a></div></div>
         </article>
       </div>
     </div></section>
-    <section class="wrap research-section" aria-labelledby="workflow-title">
-      <div class="section-heading"><div><p class="eyebrow">From analysis to usable software</p><h2 id="workflow-title">The workflow behind the tools</h2></div></div>
-      <div class="workflow-grid">
-        <div><span class="step">01</span><h3>Generate and organise</h3><p>My PhD workflow uses Python and Abaqus for a parametric study of circular reduced web section connections. The published tools organise the resulting response data by geometry and steel grade.</p></div>
-        <div><span class="step">02</span><h3>Compare and interpret</h3><p>Interactive curves, contour images and screening plots make it possible to examine trends and individual cases, with the underlying assumptions kept visible.</p></div>
-        <div><span class="step">03</span><h3>Predict and communicate</h3><p>An exported machine-learning model brings backbone prediction into the browser, alongside FE comparisons, documentation and links to the research.</p></div>
-      </div>
-      <p class="scope-note">These are research exploration tools for the studied RWS connections. Their database checks and predictions need to be interpreted within the <a href="methods.html#interpretation">documented assumptions and limitations</a>.</p>
-    </section>
     <section class="research-context" aria-labelledby="research-title"><div class="wrap context-grid">
-      <div><p class="eyebrow">Research context</p><h2 id="research-title">A connected evidence base</h2><p class="thesis-title">PhD thesis: <cite>Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames</cite>.</p><p>Research and software development by Meysam Bayat, under the supervision of Professor Konstantinos Daniel Tsavdaridis.</p></div>
+      <div><h2 id="research-title">Research</h2><p class="thesis-title">PhD thesis: <cite>Predicting Reduced Web Section (RWS) Connection Performance with Circular Web Opening in Steel Moment Frames</cite>.</p><p>I used Python and Abaqus for the parametric study and developed these browser tools to compare results and run XGBoost predictions.</p><p>Supervisor: Professor Konstantinos Daniel Tsavdaridis.</p></div>
       <div class="resource-links">
-        <a href="https://github.com/gitmeysambayat/RWS-PhD-Thesis-GUIs"><strong>Browse the repository <span aria-hidden="true">↗</span></strong><span>Source code, model export and demonstration assets</span></a>
-        <a href="https://doi.org/10.25383/city.31537849"><strong>Supplementary figure compendium <span aria-hidden="true">↗</span></strong><span>Curve families and screening maps on City Figshare</span></a>
-        <a href="methods.html#sources"><strong>Read the research and methods <span aria-hidden="true">→</span></strong><span>Published papers, supporting material and research provenance</span></a>
+        <a href="https://doi.org/10.25383/city.31537849"><strong>Supplementary figures <span aria-hidden="true">↗</span></strong><span>Curve families and screening maps</span></a>
+        <a href="methods.html#sources"><strong>Publications <span aria-hidden="true">→</span></strong><span>Published papers and preprint</span></a>
       </div>
     </div></section>
   </main>
