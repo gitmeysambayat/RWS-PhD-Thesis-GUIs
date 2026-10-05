@@ -14,7 +14,7 @@ Compare saved cumulative hysteretic energy curves for circular Reduced Web Secti
 
 **Normalised** plots per-cycle energy ratios against the batch's full-section reference, **C100**, with a baseline at 1. **Actual** plots the stored energy in **kJ** against cycle number; tick **include C100** to add each batch's reference curve.
 
-The browser plots stored arrays; it does not integrate new hysteresis data or run FE analyses. Case `6.500.S235.C00` has 26 cycle points; the others have 34. Compare compatible loading sequences. Energy alone does not establish seismic qualification; see the methods page for unresolved absolute-scale provenance.
+The browser plots stored arrays; it does not integrate new hysteresis data or run FE analyses. Case `6.500.S235.C00` has 26 cycle points; the others have 34. Compare compatible loading sequences. Energy alone does not establish seismic qualification.
 
 ## Files and local use
 

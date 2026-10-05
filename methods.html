@@ -9,12 +9,11 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="wrap header-row">
-  <a class="identity" href="./"><strong>Meysam Bayat</strong><span>Structural engineering research</span></a>
   <nav aria-label="Main navigation"><a href="./#tools">Tools</a><a href="methods.html" aria-current="page">Methods &amp; use</a><a href="https://github.com/gitmeysambayat/RWS-PhD-Thesis-GUIs">Source code <span aria-hidden="true">↗</span></a></nav>
 </div></header>
 <main class="wrap document" id="main">
   <h1>Methods and use</h1>
-  <nav class="contents" aria-label="On this page"><a href="#walkthrough">Walkthrough</a><a href="#coverage">Dataset</a><a href="#tools">How the tools work</a><a href="#interpretation">Interpretation</a><a href="#sources">Sources &amp; reuse</a></nav>
+  <nav class="contents" aria-label="On this page"><a href="#walkthrough">Walkthrough</a><a href="#coverage">Dataset</a><a href="#tools">How the tools work</a><a href="#sources">Sources &amp; reuse</a></nav>
   <section id="walkthrough" aria-labelledby="walkthrough-title">
     <h2 id="walkthrough-title">Quick start</h2>
     <p>Use IPE270, S235 and span-to-depth 6. Compare C00 (diameter/depth 30%, distance/depth 60%) with C100 (full section).</p>
@@ -49,13 +48,6 @@
       <article><h3 id="energy">Cumulative energy</h3><p>Plots saved cumulative energy in kJ or normalised by the full-section value at each cycle. Compare cases with the same loading sequence.</p></article>
       <article><h3 id="prediction">ML prediction</h3><p>Runs 400 exported XGBoost trees in the browser. Nine features yield 21 normalised moment ordinates, scaled by section plastic moment. The database benchmark compares predictions with stored FE backbones.</p></article>
     </div>
-  </section>
-  <section id="interpretation" aria-labelledby="interpretation-title">
-    <h2 id="interpretation-title">Interpreting the outputs</h2>
-    <p>Moment and rotation thresholds are screening checks, not connection prequalification. Agreement with FE data does not establish experimental validation.</p>
-    <details><summary>Span notation and material inputs</summary><p>Use full span/depth (<code>2L/h</code>), as defined in the <a href="https://doi.org/10.1002/cepa.70779">published study</a>; the GUI currently labels it <code>L/h</code>. ML uses nominal grade strength; FE material values may differ.</p></details>
-    <details><summary>Field quantities and absolute energy scales</summary><p>Raw stress/strain summary definitions and the absolute energy scales across tools are not fully documented. Use normalised indicators for comparisons; do not interpret raw summaries as pointwise fields or equate absolute energy values across tools.</p></details>
-    <details><summary>Benchmark metrics and model scope</summary><p>The repository includes model and data exports, but no training pipeline or split record. Database-wide errors therefore do not establish held-out accuracy. Ultimate rotation is a lower bound when the curve ends before a 20% strength drop; its aggregate error includes these censored values.</p></details>
   </section>
   <section id="sources" aria-labelledby="sources-title">
     <h2 id="sources-title">Publications and reuse</h2>

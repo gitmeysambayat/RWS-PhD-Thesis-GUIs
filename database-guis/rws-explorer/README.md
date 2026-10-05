@@ -13,7 +13,7 @@ Compare saved finite element (FE) backbones, response measures and contour image
 3. Press **Add curve** before changing cases to retain the current curve. The first curve follows the controls. Use **Key points** to show characteristic moments; export as SVG or PNG.
 4. Inspect von Mises and equivalent plastic strain (PEEQ) contours.
 
-The database holds 7,575 cases, with moment in kN·m and rotation in rad. Selection retrieves stored results; it does not run FE analyses. Case `6.500.S235.C00` lacks backbone ordinates from ±0.03 to ±0.06 rad. See the methods page before interpreting raw column-face field scales.
+The database holds 7,575 cases, with moment in kN·m and rotation in rad. Selection retrieves stored results; it does not run FE analyses. Case `6.500.S235.C00` lacks backbone ordinates from ±0.03 to ±0.06 rad.
 
 The strength-retention check alone does not establish connection qualification or design compliance.
 

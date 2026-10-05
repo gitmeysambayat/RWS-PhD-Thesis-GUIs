@@ -21,7 +21,7 @@ The Explorer and ML interface share **7,575 stored FE cases**: five IPE profiles
 
 The database tools display saved results. The ML tool computes predictions within its input bounds; exact FE comparisons require a matching database point. Its dataset-wide benchmark is not an independent test-set validation.
 
-Radar area and displayed thresholds are screening measures, not proof of an optimum or connection qualification. See [methods and limitations](methods.html) for input conventions and field scaling.
+Radar area and displayed thresholds are screening measures, not proof of an optimum or connection qualification.
 
 ## Repository and research sources
 

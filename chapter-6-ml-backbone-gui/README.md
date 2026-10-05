@@ -18,7 +18,7 @@ Inputs cover five IPE profiles and three grades: span-to-depth control 6–14, o
 
 `index.html` evaluates the 400 trees in `xgb_model.json`. It scales 21 predicted moment ratios by section plastic moment to produce a backbone in kN·m over −0.06 to +0.06 rad. Predictions update with the inputs.
 
-The benchmark uses the Explorer's FE dataset. Training code and train/test assignments are absent, so it does not establish independent predictive validation. See the methods page for span-notation and field-scaling limits. Displayed strength or rotation thresholds do not establish connection qualification.
+The benchmark uses the Explorer's FE dataset. Training code and train/test assignments are absent, so it does not establish independent predictive validation. Displayed strength or rotation thresholds do not establish connection qualification.
 
 ## Files and local use
 

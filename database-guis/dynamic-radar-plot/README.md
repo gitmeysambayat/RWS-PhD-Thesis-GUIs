@@ -10,7 +10,7 @@ Filter and rank saved finite element (FE) results to shortlist circular Reduced 
 
 Choose profile, grade and span-to-depth filters, then adjust the numerical ranges. **Top N** limits the plotted cases; the counter reports the full filtered set.
 
-The six spokes are column-face PEEQ, normalised column-face von Mises response, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section. PEEQ denotes equivalent plastic strain; see the methods page for the exported indicator's scaling limits.
+The six spokes are column-face PEEQ, normalised column-face von Mises response, normalised energy, strength degradation, moment at 0.06 rad relative to the full section, and peak moment relative to the full section. PEEQ denotes equivalent plastic strain.
 
 Fixed global ranges keep scales consistent. The preferred direction is outward, and polygon area determines rank. Ranking depends on the metric definitions, ranges and spoke order; it does not establish an optimum or connection qualification.
 
