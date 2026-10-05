@@ -1,34 +1,27 @@
-# RWS Connections Dynamic Radar Plot
+# RWS dynamic radar comparison
 
-![RWS dynamic radar plot screenshot](screenshots/20260605_v1_RadarPlot.png)
+Filter saved finite element (FE) results and compare six response indicators for circular Reduced Web Section (RWS) connections. Fixed global ranges keep the radar scales consistent when the selection changes.
 
-## Live GUI
+**[Open the radar comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/)** · [Methods and limitations](../../methods.html) · [All tools](../../README.md)
 
-[Open the RWS dynamic radar plot](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/dynamic-radar-plot/)
+![Radar comparison with response filters and selected case outlines](../../screenshots/20261005_RadarPlot.png)
 
-## Purpose
+## Use and interpretation
 
-This complementary thesis GUI compares RWS connection cases using a radar plot with fixed global metric ranges. It supports design-oriented interrogation of the FE database and database-driven synthesis workflow. The embedded app data defines the plotted spokes as PEEQ at the column face, von Mises stress at the column face, cumulative energy, degradation, <i>&theta;</i>(0.6), and <i>M</i><sub>c</sub>.
+Choose profile, grade and span-to-depth filters, then adjust the numerical ranges. **Top N** limits the number of displayed cases; the counter also reports all cases that pass the filters.
 
-The filter panel supports profile, steel grade, top-N selection, primary normalised filters, and secondary filters. The CSV export button downloads the currently filtered dataset.
+The six spokes represent the stored column-face PEEQ indicator, normalised column-face von Mises response, normalised dissipated energy, strength degradation, moment at 0.06 rad relative to the full-section reference, and peak moment relative to that reference. PEEQ denotes equivalent plastic strain; interpret the exported indicator using the provenance note in the methods page.
 
-## Engineering Context
+The display reverses the lower-is-preferred metrics so that the chosen favourable direction is outward. It ranks filtered cases by polygon area. This ranking depends on the metric definitions, ranges and spoke order; it is a comparison aid, not a structural optimisation or qualification procedure.
 
-RWS connections are used to move inelastic demand away from the beam-column interface by weakening the beam web rather than the flanges [1]. The radar plot is intended for comparative screening only. It should be read together with the underlying backbone response, energy dissipation, and column-face demand evidence.
+**Download Filtered CSV** exports all cases passing the filters, including cases beyond the displayed Top N. The current interface requests a download password. No FE analyses or ML predictions run in this tool.
 
-## Repository Contents
+## Files and local use
 
-- `index.html`: redirect entry point for GitHub Pages.
-- `RWS_radar_dynamic.html`: standalone Plotly-based radar GUI with embedded data.
-- `3DMBC_logo.png`, `city-st-georges-responsive-logo.svg`, `favicon_3dmbc.png`: branding and icon assets.
-- `screenshots/20260605_v1_RadarPlot.png`: README screenshot.
+- `index.html`: entry point redirecting to the application.
+- `RWS_radar_dynamic.html`: embedded dataset, filtering, radar scoring and CSV export.
+- `screenshots/`: interface screenshot; the remaining image assets are logos and icons.
 
-## Local Use
+From the **repository root**, run `python3 -m http.server 8000 --bind 127.0.0.1`, then open [the local radar comparison](http://127.0.0.1:8000/database-guis/dynamic-radar-plot/). Internet access is needed for Plotly.js and noUiSlider, loaded from public CDNs.
 
-Open `index.html` or `RWS_radar_dynamic.html` directly in a browser, or serve the repository root with any static HTTP server. The page uses Plotly and noUiSlider from public CDNs.
-
-## References
-
-[1] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "A case study for optimising the geometry and moment capacity of code compliant welded RWS connections," *Frontiers in Built Environment*, 2025. DOI: [10.3389/fbuil.2025.1592665](https://doi.org/10.3389/fbuil.2025.1592665).
-
-[2] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading," *ce/papers*, 2025. DOI: [10.1002/cepa.70170](https://doi.org/10.1002/cepa.70170).
+Developed by Meysam Bayat as a companion to the RWS thesis. See the [repository research sources, credits and reuse terms](../../README.md#repository-and-research-sources).

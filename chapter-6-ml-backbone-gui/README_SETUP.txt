@@ -1,17 +1,12 @@
-RWS merged standalone GUI (no contours folder included)
+Historical standalone-package setup note — superseded
 
-This package is intended for a separate GitHub Pages repository.
+This tool is now part of the consolidated RWS-PhD-Thesis-GUIs repository.
+The model file and contour images are already included in this directory.
 
-Files included:
-- index.html
-- xgb_model.json
-- .nojekyll
-- contours/README_COPY_YOUR_EXISTING_CONTOURS_HERE.txt
+Use README.md in this directory for current instructions, or the repository's
+methods.html page for the full guide. Serve the repository root with:
 
-Important:
-1. Upload these files to the root of your new repository.
-2. Then copy the full 'contours' folder from your original rws-gui repository into this new repository root,
-   replacing the placeholder file inside contours/.
-3. Enable GitHub Pages from the repository root.
+python3 -m http.server 8000 --bind 127.0.0.1
 
-Until the contours folder is copied, the backbone and ML functions will work, but contour plots will show as unavailable.
+Then open http://127.0.0.1:8000/chapter-6-ml-backbone-gui/.
+Keep this tool inside its existing directory; no separate repository is needed.

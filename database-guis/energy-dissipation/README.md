@@ -1,34 +1,27 @@
-# Cumulative Energy Dissipation for RWS Connections
+# Cumulative energy comparison for RWS connections
 
-![Cumulative energy dissipation screenshot](screenshots/20260605_v1_EnergyDissipation.png)
+Compare saved cumulative hysteretic energy curves for circular Reduced Web Section (RWS) connections. The tool supports comparisons within a batch and across different profiles, steel grades and span-to-depth settings.
 
-## Live GUI
+**[Open the energy comparison](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/)** · [Methods and limitations](../../methods.html) · [All tools](../../README.md)
 
-[Open the cumulative energy dissipation GUI](https://gitmeysambayat.github.io/RWS-PhD-Thesis-GUIs/database-guis/energy-dissipation/)
+![Energy comparison showing case selection and cumulative energy curves](../../screenshots/20261005_EnergyDissipation.png)
 
-## Purpose
+## Use
 
-This complementary thesis GUI compares cumulative hysteretic energy dissipation across selected RWS connection batches and cases. It supports selection by span-to-depth ratio, IPE profile, steel grade, and case ID, with normalised and actual cumulative energy plot tabs.
+1. Choose a batch using the span-to-depth, profile and grade selectors.
+2. Select cases from the opening-geometry matrix or case selector. The page starts with C01 and C21 selected; press **Clear all** before setting up a single-case comparison. Selections are retained across batches; use the selected-case list to remove individual curves.
+3. Choose **Plot selected**, then switch between **Normalised** and **Actual**.
 
-The selected-case matrix uses the same opening-geometry notation as the thesis workflow, including <i>d</i><sub>o</sub>/<i>h</i> and <i>S</i>/<i>h</i>.
+The normalised view plots stored energy ratios relative to the batch's full-section reference, **C100**, with a reference line at 1. The actual view plots energy in **kJ** against cycle number; its checkbox adds a C100 curve for each selected batch.
 
-## Engineering Context
+The browser plots precomputed arrays. It does not integrate new hysteresis data or run FE analyses. Case `6.500.S235.C00` contains 26 cycle points rather than the 34 available for the other cases. Normalised and actual energy answer different comparison questions: inspect both and preserve batch identifiers when interpreting a result. An energy comparison alone does not establish seismic qualification.
 
-Energy dissipation is one of the response measures used to compare cyclic RWS connection performance in the thesis workflow and related RWS studies [1,2]. This GUI is intended to reveal comparative trends between behaviourally similar cases, not to replace detailed cyclic qualification or project-specific seismic design checks.
+## Files and local use
 
-## Repository Contents
+- `index.html`: entry point redirecting to the application.
+- `batches_with_plots.html`: interface, embedded energy data and Plotly animation.
+- `screenshots/`: interface screenshot; the remaining image assets are logos and icons.
 
-- `index.html`: redirect entry point for GitHub Pages.
-- `batches_with_plots.html`: standalone Plotly-based cumulative energy GUI with embedded data.
-- `3DMBC_logo.png`, `city-st-georges-responsive-logo.svg`, `favicon_3dmbc.png`: branding and icon assets.
-- `screenshots/20260605_v1_EnergyDissipation.png`: README screenshot.
+From the **repository root**, run `python3 -m http.server 8000 --bind 127.0.0.1`, then open [the local energy comparison](http://127.0.0.1:8000/database-guis/energy-dissipation/). Internet access is needed for Plotly.js, loaded from a public CDN.
 
-## Local Use
-
-Open `index.html` or `batches_with_plots.html` directly in a browser, or serve the repository root with any static HTTP server. The page uses Plotly from a public CDN.
-
-## References
-
-[1] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "A case study for optimising the geometry and moment capacity of code compliant welded RWS connections," *Frontiers in Built Environment*, 2025. DOI: [10.3389/fbuil.2025.1592665](https://doi.org/10.3389/fbuil.2025.1592665).
-
-[2] M. Bayat, K. D. Tsavdaridis, and A. Alonso-Rodriguez, "Evaluation of Reduced Web Section (RWS) Connections Subjected to Cyclic Loading," *ce/papers*, 2025. DOI: [10.1002/cepa.70170](https://doi.org/10.1002/cepa.70170).
+Developed by Meysam Bayat as a companion to the RWS thesis. See the [repository research sources, credits and reuse terms](../../README.md#repository-and-research-sources).

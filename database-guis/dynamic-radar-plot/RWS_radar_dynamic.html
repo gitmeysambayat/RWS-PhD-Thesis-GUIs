@@ -95,14 +95,40 @@
       .analysisGrid{ grid-template-columns:1fr; }
       #fig{ height:620px; }
     }
-  </style>
+
+  /* Portfolio navigation and narrow-screen access to scientific tables/plots. */
+  .portfolioNav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 8px;font:600 12px/1.5 system-ui,sans-serif;}
+  .portfolioNav a{color:#0b5cad;text-decoration:underline;text-underline-offset:3px;}
+  .demoNote{margin:8px 0 0;font-size:12px;line-height:1.5;color:#475569;max-width:1100px;}
+  :focus-visible{outline:3px solid #0b5cad;outline-offset:3px;}
+  h1.title{margin:0;}
+  main > section,.workspace,.card,.analysisGrid > *{min-width:0;}
+  .tableScroll,.plotScroll{max-width:100%;overflow-x:auto;}
+  .tableScroll{margin:8px 0;}
+  .tableScroll table{margin-top:0;}
+  @media(max-width:640px){
+    .headerRow{padding-right:0;min-height:0;}
+    .brandBox{position:static;margin-top:8px;}
+    .metaLine,#geomLine,#caseGuideNote,#caseSelHint,#caseMatrix caption,.thesis caption{white-space:normal;}
+    .specGrid{grid-template-columns:minmax(0,1fr) 8px minmax(0,1.15fr) 8px minmax(0,1fr) 8px minmax(0,1fr);}
+    .specSel{min-width:0;padding-left:2px;padding-right:2px;}
+    .specBottom{font-size:10px;}
+    .tableScroll table{min-width:430px;}
+    .plotScroll #plotSvg{min-width:600px;}
+    .modeCardHead,.seg,.plotHead{flex-wrap:wrap;}
+    .models label{white-space:normal;}
+    .row{flex-wrap:wrap;}
+  }
+  @media(max-width:640px){#fig{min-width:720px;} .numrow{flex-wrap:wrap;} .criteriaControl{flex-wrap:wrap;} .criteriaControl label{white-space:normal;}}
+</style>
 </head>
 <body>
 
 <header>
+  <nav class="portfolioNav" aria-label="Research portfolio"><a href="../../index.html">All research tools</a><a href="../../methods.html">Methods and limitations</a></nav>
   <div class="headerRow">
     <div class="titleWrap">
-      <div class="title" id="pageTitle">RWS connection dynamic radar plot</div>
+      <h1 class="title" id="pageTitle">RWS connection dynamic radar plot</h1>
       <div class="metaLine" id="datasetSummary">Complementary thesis GUI for comparing normalised column-face demand, energy, degradation, <i>&theta;</i>(0.6), and <i>M</i><sub>c</sub>.</div>
     </div>
     <div class="brandBox" aria-label="Laboratory and institutional logos">
@@ -110,20 +136,22 @@
       <img class="cityBrand" src="city-st-georges-responsive-logo.svg" alt="City St George's, University of London logo">
     </div>
   </div>
+  <p class="demoNote">Filter saved FE results, then compare the displayed cases. The ranking uses radar polygon area and the stated axis directions; it is a comparison aid, not a structural optimisation or code-compliance certificate.</p>
+  <p class="demoNote">Case <span class="mono">6.500.S235.C00</span> has an incomplete FE backbone and is excluded from ranking and CSV export. The archived data and global normalisation ranges are unchanged. <a href="../../methods.html">Read the data limitations</a>.</p>
 </header>
 
 <main class="pageShell">
 <div class="topbar">
   <div>
-    <label>Profile:</label>
+    <label for="profileSel">Profile:</label>
     <select id="profileSel"><option value="All">All</option></select>
   </div>
   <div>
-    <label>Grade:</label>
+    <label for="gradeSel">Grade:</label>
     <select id="gradeSel"><option value="All">All</option></select>
   </div>
   <div>
-    <label>Span-to-depth ratio:</label>
+    <label for="s2dSel">Span-to-depth ratio:</label>
     <select id="s2dSel"><option value="All">All</option></select>
   </div>
   <div class="criteriaControl">
@@ -134,12 +162,12 @@
     </select>
   </div>
   <div>
-    <label>Top-N:</label>
+    <label for="topn">Top-N:</label>
     <input id="topn" type="number" min="1" step="1" value="10" style="width:80px"/>
   </div>
   <button id="downloadBtn">Download Filtered CSV</button>
   <button id="clearRadarBtn" type="button">Clear radar plot</button>
-  <div class="small"><span id="count" class="badge"></span></div>
+  <div class="small"><span id="count" class="badge" role="status"></span></div>
 </div>
 
 <div class="analysisGrid">
@@ -149,7 +177,7 @@
   <div class="filters-grid" id="primaryFilters"></div>
 </details>
 
-<div id="fig"></div>
+<div class="plotScroll" role="region" aria-label="Radar plot; scroll horizontally on small screens" tabindex="0"><div id="fig"></div></div>
 </div>
 
 <!-- OTHER filters -->
@@ -340249,9 +340277,9 @@ for (const f of DATA.primary_numeric) {
   card.innerHTML = `
     <h4>${displayLabelHtml(f.col)} <span class="small">(numeric)</span></h4>
     <div class="numrow"><span class="small">LOW</span>
-      <input id="num_lo_${sid}" type="number" step="any" value="${f.min}">
+      <input id="num_lo_${sid}" aria-label="${escapeHtml(displayLabelText(f.col))}: lower bound" type="number" step="any" value="${f.min}">
       <span class="small">HIGH</span>
-      <input id="num_hi_${sid}" type="number" step="any" value="${f.max}">
+      <input id="num_hi_${sid}" aria-label="${escapeHtml(displayLabelText(f.col))}: upper bound" type="number" step="any" value="${f.max}">
     </div>
     <div id="rng_${sid}" class="range"></div>
     <div class="small">Data min ${Number(f.min).toFixed(3)} | med ${Number(f.median).toFixed(3)} | max ${Number(f.max).toFixed(3)}</div>
@@ -340266,7 +340294,8 @@ for (const f of DATA.primary_numeric) {
     connect: true,
     range: { min: f.min, max: f.max },
     step: (f.max - f.min) / 200 || 0.0001,
-    format: sliderNumberFormat
+    format: sliderNumberFormat,
+    handleAttributes: [{'aria-label': displayLabelText(f.col) + ': lower bound'}, {'aria-label': displayLabelText(f.col) + ': upper bound'}]
   });
   slider.noUiSlider.on('update', (vals)=>{ loNum.value = vals[0]; hiNum.value = vals[1]; });
   slider.noUiSlider.on('change', draw);
@@ -340292,9 +340321,9 @@ for (const f of DATA.other_numeric) {
   card.innerHTML = `
     <h4>${displayLabelHtml(f.col)} <span class="small">(numeric)</span></h4>
     <div class="numrow"><span class="small">LOW</span>
-      <input id="num_lo_${sid}" type="number" step="any" value="${f.min}">
+      <input id="num_lo_${sid}" aria-label="${escapeHtml(displayLabelText(f.col))}: lower bound" type="number" step="any" value="${f.min}">
       <span class="small">HIGH</span>
-      <input id="num_hi_${sid}" type="number" step="any" value="${f.max}">
+      <input id="num_hi_${sid}" aria-label="${escapeHtml(displayLabelText(f.col))}: upper bound" type="number" step="any" value="${f.max}">
     </div>
     <div id="rng_${sid}" class="range"></div>
     <div class="small">Data min ${Number(f.min).toFixed(3)} | med ${Number(f.median).toFixed(3)} | max ${Number(f.max).toFixed(3)}</div>
@@ -340309,7 +340338,8 @@ for (const f of DATA.other_numeric) {
     connect: true,
     range: { min: f.min, max: f.max },
     step: (f.max - f.min) / 200 || 0.0001,
-    format: sliderNumberFormat
+    format: sliderNumberFormat,
+    handleAttributes: [{'aria-label': displayLabelText(f.col) + ': lower bound'}, {'aria-label': displayLabelText(f.col) + ': upper bound'}]
   });
   slider.noUiSlider.on('update', (vals)=>{ loNum.value = vals[0]; hiNum.value = vals[1]; });
   slider.noUiSlider.on('change', draw);
@@ -340330,7 +340360,7 @@ for (const f of DATA.other_cats) {
   card.className = 'ctrl';
   card.innerHTML = `
     <h4>${displayLabelHtml(f.col)} <span class="small">(categorical)</span></h4>
-    <select id="sel_${sid}">${f.values.map(v=>`<option value="${v}">${v}</option>`).join('')}</select>
+    <select id="sel_${sid}" aria-label="${escapeHtml(displayLabelText(f.col))}">${f.values.map(v=>`<option value="${v}">${v}</option>`).join('')}</select>
   `;
   moreDiv.appendChild(card);
   const sel = card.querySelector('#sel_'+sid);
@@ -340385,6 +340415,8 @@ function draw() {
   // filter + score
   const kept = [];
   for (const row of DATA.rows) {
+    // Exclude the verified incomplete FE case; preserve archived rows and global scales.
+    if (row.Model === '6.500.S235.C00') continue;
     if (prof !== 'All' && String(row.Profile) !== prof) continue;
     if (grad !== 'All' && String(row.Grade)   !== grad) continue;
     if (s2d !== 'All' && String(row.S2D)      !== s2d) continue;

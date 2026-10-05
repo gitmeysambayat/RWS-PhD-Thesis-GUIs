@@ -141,13 +141,39 @@
     .energyLayout{ grid-template-columns:1fr; }
     #plot-normalised, #plot-actual{ height:600px; }
   }
+
+  /* Portfolio navigation and narrow-screen access to scientific tables/plots. */
+  .portfolioNav{display:flex;flex-wrap:wrap;gap:8px 20px;margin:0 0 8px;font:600 12px/1.5 system-ui,sans-serif;}
+  .portfolioNav a{color:#0b5cad;text-decoration:underline;text-underline-offset:3px;}
+  .demoNote{margin:8px 0 0;font-size:12px;line-height:1.5;color:#475569;max-width:1100px;}
+  :focus-visible{outline:3px solid #0b5cad;outline-offset:3px;}
+  h1.title{margin:0;}
+  main > section,.workspace,.card,.analysisGrid > *{min-width:0;}
+  .tableScroll,.plotScroll{max-width:100%;overflow-x:auto;}
+  .tableScroll{margin:8px 0;}
+  .tableScroll table{margin-top:0;}
+  @media(max-width:640px){
+    .headerRow{padding-right:0;min-height:0;}
+    .brandBox{position:static;margin-top:8px;}
+    .metaLine,#geomLine,#caseGuideNote,#caseSelHint,#caseMatrix caption,.thesis caption{white-space:normal;}
+    .specGrid{grid-template-columns:minmax(0,1fr) 8px minmax(0,1.15fr) 8px minmax(0,1fr) 8px minmax(0,1fr);}
+    .specSel{min-width:0;padding-left:2px;padding-right:2px;}
+    .specBottom{font-size:10px;}
+    .tableScroll table{min-width:430px;}
+    .plotScroll #plotSvg{min-width:600px;}
+    .modeCardHead,.seg,.plotHead{flex-wrap:wrap;}
+    .models label{white-space:normal;}
+    .row{flex-wrap:wrap;}
+  }
+  @media(max-width:640px){#plot-normalised,#plot-actual{min-width:660px;}}
 </style>
 </head>
 <body>
   <header>
+  <nav class="portfolioNav" aria-label="Research portfolio"><a href="../../index.html">All research tools</a><a href="../../methods.html">Methods and limitations</a></nav>
     <div class="headerRow">
       <div class="titleWrap">
-        <div class="title">Cumulative energy dissipation selector</div>
+        <h1 class="title">Cumulative energy dissipation selector</h1>
         <div class="metaLine">Complementary thesis GUI for comparing cumulative energy dissipation across selected RWS batches and cases.</div>
       </div>
       <div class="brandBox" aria-label="Laboratory and institutional logos">
@@ -155,7 +181,8 @@
         <img class="cityBrand" src="city-st-georges-responsive-logo.svg" alt="City St George's, University of London logo">
       </div>
     </div>
-  </header>
+    <p class="demoNote">Select cases in one or more batches to compare saved cyclic energy histories. Normalised values use the corresponding full-section case (C100). These are research comparisons, not design approval.</p>
+</header>
 
   <main class="energyLayout">
     <section class="card controlPanel">
@@ -188,7 +215,7 @@
 
       <div class="divider"></div>
 
-      <table class="thesis case-matrix" id="caseMatrix">
+      <div class="tableScroll" role="region" aria-label="Scrollable data table" tabindex="0"><table class="thesis case-matrix" id="caseMatrix">
         <caption>Parametric combinations of (<i>S</i>/<i>h</i>) and (<i>d</i><sub>o</sub>/<i>h</i>) in each batch of analysis</caption>
         <thead>
           <tr>
@@ -212,7 +239,7 @@
           <tr><th>220</th><td class="case-cell" data-do="30" data-sh="220" data-case="C08">C08</td><td class="case-cell" data-do="35" data-sh="220" data-case="C18">C18</td><td class="case-cell" data-do="40" data-sh="220" data-case="C28">C28</td><td class="case-cell" data-do="45" data-sh="220" data-case="C38">C38</td><td class="case-cell" data-do="50" data-sh="220" data-case="C48">C48</td><td class="case-cell" data-do="55" data-sh="220" data-case="C58">C58</td><td class="case-cell" data-do="60" data-sh="220" data-case="C68">C68</td><td class="case-cell" data-do="65" data-sh="220" data-case="C78">C78</td><td class="case-cell" data-do="70" data-sh="220" data-case="C88">C88</td><td class="case-cell" data-do="75" data-sh="220" data-case="C98">C98</td></tr>
           <tr><th>240</th><td class="case-cell" data-do="30" data-sh="240" data-case="C09">C09</td><td class="case-cell" data-do="35" data-sh="240" data-case="C19">C19</td><td class="case-cell" data-do="40" data-sh="240" data-case="C29">C29</td><td class="case-cell" data-do="45" data-sh="240" data-case="C39">C39</td><td class="case-cell" data-do="50" data-sh="240" data-case="C49">C49</td><td class="case-cell" data-do="55" data-sh="240" data-case="C59">C59</td><td class="case-cell" data-do="60" data-sh="240" data-case="C69">C69</td><td class="case-cell" data-do="65" data-sh="240" data-case="C79">C79</td><td class="case-cell" data-do="70" data-sh="240" data-case="C89">C89</td><td class="case-cell" data-do="75" data-sh="240" data-case="C99">C99</td></tr>
         </tbody>
-      </table>
+      </table></div>
 
       <div class="row">
         <label class="check"><input type="checkbox" id="includeC100"> include C100 in actual plot</label>
@@ -237,7 +264,7 @@
         <button class="tabbtn active" id="tabNorm">Normalised</button>
         <button class="tabbtn" id="tabAct">Actual</button>
       </div>
-      <div id="plots">
+      <div id="plots" class="plotScroll" role="region" aria-label="Energy plots; scroll horizontally on small screens" tabindex="0">
         <div id="plot-normalised"></div>
         <div id="plot-actual" style="display:none;"></div>
       </div>
@@ -712,6 +739,32 @@ function plotSelected() {
 
 /* boot */
 document.addEventListener("DOMContentLoaded", init);
+</script>
+
+<script>
+(() => {
+  document.querySelectorAll('td.case-cell').forEach(cell => {
+    cell.tabIndex = 0;
+    cell.setAttribute('role', 'button');
+    cell.setAttribute('aria-label', `Case ${cell.dataset.case}: opening ${cell.dataset.do}% of depth, distance ${cell.dataset.sh}% of depth`);
+    const sync = () => {
+      cell.setAttribute('aria-pressed', String(cell.classList.contains('sel')));
+      cell.setAttribute('aria-disabled', String(cell.classList.contains('disabled')));
+    };
+    sync();
+    new MutationObserver(sync).observe(cell, {attributes:true, attributeFilter:['class']});
+    cell.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {event.preventDefault();cell.click();}
+    });
+  });
+  document.querySelectorAll('.control input[type="range"]').forEach(input => {
+    const value = input.closest('.control').querySelector('.value');
+    if (!value) return;
+    const sync = () => input.setAttribute('aria-valuetext', value.textContent.trim());
+    sync();
+    new MutationObserver(sync).observe(value, {childList:true, characterData:true, subtree:true});
+  });
+})();
 </script>
 </body>
 </html>
